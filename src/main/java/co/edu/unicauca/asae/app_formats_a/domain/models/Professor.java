@@ -64,8 +64,12 @@ public class Professor {
         return aFormats;
     }
 
-    public void setaFormats(List<AFormat> aFormats) {
+    public void setAFormats(List<AFormat> aFormats) {
         this.aFormats = aFormats;
+    }
+
+    public void addFormat(AFormat aFormat) {
+        this.aFormats.add(aFormat);
     }
 
 }
