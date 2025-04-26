@@ -19,7 +19,7 @@ import java.util.List;
 public class ObservationEntity {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long observationId;
+    private Long id;
 
     @Column(name = "observation", nullable = false)
     private String observation;

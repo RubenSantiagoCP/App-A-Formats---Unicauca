@@ -1,11 +1,11 @@
-package co.edu.unicauca.asae.app_formats_a.infrastructure.input.controllers;
+package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.controllers;
 
 
 import co.edu.unicauca.asae.app_formats_a.application.input.ManageAFormatUCIntPort;
 import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
-import co.edu.unicauca.asae.app_formats_a.infrastructure.input.DTORequest.AFormatDTORequest;
-import co.edu.unicauca.asae.app_formats_a.infrastructure.input.DTOResponse.AFormatDTOResponse;
-import co.edu.unicauca.asae.app_formats_a.infrastructure.input.mappers.AFormatInputMapper;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.request.AFormatDTORequest;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.AFormatDTOResponse;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.mappers.AFormatInputMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

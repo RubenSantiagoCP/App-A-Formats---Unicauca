@@ -34,8 +34,6 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
             String email = aFormat.getObjProfessor().getEmail();
             Optional<Professor> objProfessor = this.manageProfessorGateway.existsProfessorByEmail(email);
 
-            objProfessor.ifPresent(aFormat::setObjProfessor);
-
             if(objProfessor.isPresent()){
                 aFormat.setObjProfessor(objProfessor.get());
             }else{
@@ -44,6 +42,7 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
 
             aFormat.getObjProfessor().addFormat(aFormat);
             State state = new State(StateEnum.FORMULATED, LocalDate.now());
+            state.setObjAformat(aFormat);
             aFormat.setState(state);
             objCreatedAFormat = this.manageAFormatGateway.save(aFormat);
         }

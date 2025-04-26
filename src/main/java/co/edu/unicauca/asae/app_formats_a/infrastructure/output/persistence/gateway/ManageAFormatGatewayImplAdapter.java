@@ -27,8 +27,7 @@ public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntP
 
     @Override
     public boolean existsAFormatByTitle(String title) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'existsAFormatByTitle'");
+        return aFormatRepository.existsByTitle(title);
     }
     
 }

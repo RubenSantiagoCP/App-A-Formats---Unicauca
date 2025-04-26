@@ -1,4 +1,4 @@
-package co.edu.unicauca.asae.app_formats_a.infrastructure.input.DTOResponse;
+package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

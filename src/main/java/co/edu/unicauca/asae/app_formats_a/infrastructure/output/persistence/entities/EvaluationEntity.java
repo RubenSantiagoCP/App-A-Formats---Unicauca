@@ -2,7 +2,6 @@ package co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.ent
 
 import co.edu.unicauca.asae.app_formats_a.commons.enums.ConceptEnum;
 
-import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +18,7 @@ import java.util.List;
 public class EvaluationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long evaluationId;
+    private Long id;
 
     @Column(name = "concept", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -33,7 +32,7 @@ public class EvaluationEntity {
 
     @ManyToOne
     @JoinColumn(name = "formatAId", nullable = false)
-    private AFormat objAFormat;
+    private AFormatEntity objAFormat;
 
     @OneToMany(mappedBy = "objEvaluation")
     private List<ObservationEntity> observations;

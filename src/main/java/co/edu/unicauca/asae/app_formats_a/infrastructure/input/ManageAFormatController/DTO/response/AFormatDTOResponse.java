@@ -1,7 +1,6 @@
-package co.edu.unicauca.asae.app_formats_a.infrastructure.input.DTOResponse;
+package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response;
 
-import co.edu.unicauca.asae.app_formats_a.commons.enums.StateEnum;
-import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.ProfessorEntity;
+import co.edu.unicauca.asae.app_formats_a.domain.models.State;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AFormatDTOResponse {
-    private Long formatAId;
+    private Long id;
 
     private String generalObjective;
 
@@ -23,9 +22,9 @@ public class AFormatDTOResponse {
 
     private List<String> specificObjective;
 
-    private ProfessorEntity objProfessor;
+    private ProfessorDTOResponse objProfessor;
 
-    private StateEnum state;
+    private State state;
 
     //private List<EvaluationEntity> evaluations;
 

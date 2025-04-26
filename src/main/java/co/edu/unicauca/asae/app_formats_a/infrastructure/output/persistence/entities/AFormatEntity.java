@@ -2,7 +2,6 @@ package co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.ent
 
 import java.util.List;
 
-import co.edu.unicauca.asae.app_formats_a.commons.enums.StateEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -19,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 public class AFormatEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long formatAId;
+    private Long id;
 
     @Column(name = "general_objective", nullable = false)
     private String generalObjective;
@@ -35,7 +34,7 @@ public class AFormatEntity {
     private ProfessorEntity objProfessor;
 
     @OneToOne(mappedBy = "objAformat", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
-    private StateEnum state;
+    private StateEntity state;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "objAFormat", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
     private List<EvaluationEntity> evaluations;

@@ -20,7 +20,7 @@ import lombok.Setter;
 @Builder
 public class StateEntity {
     @Id
-    private Long stateId;
+    private Long id;
 
     @Column(name = "actual_state", nullable = false)
     @Enumerated(EnumType.STRING)
