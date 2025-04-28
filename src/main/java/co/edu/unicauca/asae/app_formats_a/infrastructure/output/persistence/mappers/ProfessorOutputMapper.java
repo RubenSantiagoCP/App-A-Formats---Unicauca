@@ -7,30 +7,15 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProfessorOutputMapper {
-    // @Autowired
-    // protected AFormatOutputMapper aFormatOutputMapper;
-
-    // public abstract ProfessorEntity toEntity(Professor professor);
-
-    // @Mapping(target = "aFormats", expression = "java(AFormatsToDomainIgnoringEvaluations(professorEntity.getAFormats()))")
-    // public abstract Professor toDomain(ProfessorEntity professorEntity);
-
-    // protected List<AFormat> AFormatsToDomainIgnoringEvaluations(List<AFormatEntity> aFormatEntities) {
-    //     if (aFormatEntities == null) return null;
-    //     return aFormatEntities.stream()
-    //             .map(aFormatOutputMapper::toDomainIgnoringEvaluations) // ✅ no typo
-    //             .collect(Collectors.toList());
-    // }
-
-    @Mapping(target = "historicalRecord", ignore = true) // Evita ciclo con HistoricalRecordEntity
-    @Mapping(target = "aFormats", ignore = true) // Evita ciclo con AFormatEntity
+    @Mapping(target = "historicalRecord", ignore = true) 
+    @Mapping(target = "aFormats", ignore = true)
     Professor toDomain(ProfessorEntity entity);
 
-    @Mapping(target = "historicalRecord", ignore = true)
-    @Mapping(target = "aFormats", ignore = true)
+   
     ProfessorEntity toEntity(Professor domain);
 
     List<Professor> toDomainList(List<ProfessorEntity> entities);

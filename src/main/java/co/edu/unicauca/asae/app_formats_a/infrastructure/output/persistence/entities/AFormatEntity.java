@@ -29,8 +29,8 @@ public class AFormatEntity {
     @Column(name = "specific_objective", nullable = false)
     private List<String> specificObjective;
 
-    @ManyToOne(cascade = { CascadeType.PERSIST })
-    @JoinColumn(name = "professorId", referencedColumnName = "id")
+    @ManyToOne(cascade = { CascadeType.ALL })
+    @JoinColumn(name = "professorId", nullable = false)
     private ProfessorEntity objProfessor;
 
     @OneToOne(mappedBy = "objAformat", cascade = { CascadeType.ALL})

@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(exclude = {"objEvaluation", "proffesors"})
+@ToString(exclude = {"objEvaluation", "professors"})
 
 public class ObservationEntity {
      @Id
@@ -31,7 +31,7 @@ public class ObservationEntity {
     @JoinTable(name = "proffesor_observation",
             joinColumns = @JoinColumn(name = "observation_id"),
             inverseJoinColumns = @JoinColumn(name = "proffesor_id"))
-    private List<ProfessorEntity> proffesors;
+    private List<ProfessorEntity> professors;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "evaluationId",nullable = false)

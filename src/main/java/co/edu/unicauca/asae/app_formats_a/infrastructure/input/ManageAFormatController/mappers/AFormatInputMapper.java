@@ -13,15 +13,15 @@ import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatCont
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.SubclassMapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AFormatInputMapper {
     @SubclassMapping(source = PPAFormatDTORequest.class, target = PPAFormat.class)
     @SubclassMapping(source = TIAFormatDTORequest.class, target = TIAFormat.class)
     @Mapping(target = "objProfessor.historicalRecord", ignore = true)
     @Mapping(target = "objProfessor.aFormats", ignore = true)
-    @Mapping(target = "objProfessor.id", ignore = true)
     @Mapping(target = "state", ignore = true)
     @Mapping(target = "evaluations", ignore = true)
     @Mapping(target = "id", ignore = true)
@@ -29,7 +29,6 @@ public interface AFormatInputMapper {
 
     @SubclassMapping(source = PPAFormat.class, target = PPAFormatDTOResponse.class)
     @SubclassMapping(source = TIAFormat.class, target = TIAFormatDTOResponse.class)
-    @Mapping(target = "state.objAformat", ignore = true)
     AFormatDTOResponse toResponse(AFormat aFormat);
 
 }

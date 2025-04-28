@@ -3,8 +3,8 @@ package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatCon
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.unicauca.asae.app_formats_a.application.input.ManageProfessorUCIntPort;
 import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
-import co.edu.unicauca.asae.app_formats_a.domain.useCases.ManageProfessorUCAdapter;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.ProfessorDTOResponse;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.mappers.ProfessorInputMapper;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class ProfessorRestController {
     
-    private final ManageProfessorUCAdapter manageProfessorUCAdapter;
+    private final ManageProfessorUCIntPort manageProfessorUCAdapter;
     private final ProfessorInputMapper professorInputMapper;
 
     @GetMapping("/get")

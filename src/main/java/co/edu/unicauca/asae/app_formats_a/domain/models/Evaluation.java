@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import co.edu.unicauca.asae.app_formats_a.commons.enums.ConceptEnum;
+import lombok.Builder;
 
+@Builder
 public class Evaluation {
 
     private Long id;
@@ -23,6 +25,7 @@ public class Evaluation {
         this.objAFormat = objAFormat;
         this.observations = observations;
     }
+
 
     public Long getId() {
         return id;

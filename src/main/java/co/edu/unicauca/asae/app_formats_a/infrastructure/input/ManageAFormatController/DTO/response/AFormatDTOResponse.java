@@ -1,6 +1,5 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response;
 
-import co.edu.unicauca.asae.app_formats_a.domain.models.State;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,8 +23,5 @@ public class AFormatDTOResponse {
 
     private ProfessorDTOResponse objProfessor;
 
-    private State state;
-
-    //private List<EvaluationEntity> evaluations;
-
+    private StateDTOResponse state;
 }

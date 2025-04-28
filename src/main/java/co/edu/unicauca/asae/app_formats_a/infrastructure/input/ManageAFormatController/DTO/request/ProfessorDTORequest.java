@@ -3,6 +3,7 @@ package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatCon
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,6 +15,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProfessorDTORequest {
+
+    @NotNull(message = "professor.id.required")
+    private Long id;
 
     @Size(min = 3, max = 100, message = "professor.name.size")
     @NotBlank(message = "professor.name.required")

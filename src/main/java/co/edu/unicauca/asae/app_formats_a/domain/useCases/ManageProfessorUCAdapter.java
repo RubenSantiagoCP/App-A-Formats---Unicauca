@@ -7,12 +7,15 @@ import co.edu.unicauca.asae.app_formats_a.application.input.ManageProfessorUCInt
 import co.edu.unicauca.asae.app_formats_a.application.output.ManageProfessorGatewayIntPort;
 import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
 import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class ManageProfessorUCAdapter implements ManageProfessorUCIntPort {
 
     private final ManageProfessorGatewayIntPort manageProfessorGateway;
+
+    public ManageProfessorUCAdapter(ManageProfessorGatewayIntPort manageProfessorGateway) {
+        this.manageProfessorGateway = manageProfessorGateway;
+    }
+
     @Override
     public List<Professor> getAll() {
         // TODO Auto-generated method stub
@@ -36,6 +39,4 @@ public class ManageProfessorUCAdapter implements ManageProfessorUCIntPort {
         return this.manageProfessorGateway.getByGroupAndStartWithPattern(groupName, pattern);
     }
 
-   
-    
 }

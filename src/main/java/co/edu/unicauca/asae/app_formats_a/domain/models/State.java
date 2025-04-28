@@ -11,9 +11,12 @@ public class State {
     private LocalDate registerStateDate;
     private AFormat objAformat;
 
-    public State(StateEnum actualState, LocalDate registerStateDate) {
+    
+    public State(Long id, StateEnum actualState, LocalDate registerStateDate, AFormat objAformat) {
+        this.id = id;
         this.actualState = actualState;
         this.registerStateDate = registerStateDate;
+        this.objAformat = objAformat;
     }
 
     public Long getId() {

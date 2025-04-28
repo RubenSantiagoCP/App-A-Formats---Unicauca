@@ -37,6 +37,6 @@ public class ProfessorEntity {
     @OneToMany(mappedBy = "professor")
     private List<HistoricalRecordEntity> historicalRecord;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objProfessor", cascade = {CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objProfessor")
     private List<AFormatEntity> aFormats;
 }

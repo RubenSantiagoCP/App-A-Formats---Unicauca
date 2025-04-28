@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ManageProfessorGatewayImplAdapter implements ManageProfessorGatewayIntPort {
 
     private final ProfessorRepositoryInt professorRepository;
@@ -21,12 +22,8 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
 
     @Override
     @Transactional
-    public Optional<Professor> existsProfessorByEmail(String email) {
-        ProfessorEntity professor = professorRepository.findByEmail(email);
-        if (professor != null) {
-            return Optional.of(professorOutputMapper.toDomain(professor));
-        }
-        return Optional.empty();
+    public boolean existsProfessorByEmail(String email) {
+        return professorRepository.existsByEmail(email);
     }
 
     @Override
@@ -44,5 +41,25 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
         return professorOutputMapper.toDomainList(professors);
     }
 
+    @Override
+    public Optional<Professor> findById(Long id) {
+        Optional<ProfessorEntity> professor = professorRepository.findById(id);
+        if (professor.isPresent()) {
+            return Optional.of(professorOutputMapper.toDomain(professor.get()));
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Professor> getAllProfessorsById(List<Long> ids) {
+        List<ProfessorEntity> professors = professorRepository.findAllById(ids);
+        return professorOutputMapper.toDomainList(professors);
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        return professorRepository.existsById(id);
+    }
+   
    
 }

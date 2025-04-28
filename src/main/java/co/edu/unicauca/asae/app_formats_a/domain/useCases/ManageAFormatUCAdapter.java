@@ -1,14 +1,13 @@
 package co.edu.unicauca.asae.app_formats_a.domain.useCases;
 
 import java.time.LocalDate;
-import java.util.*;
+
 
 import co.edu.unicauca.asae.app_formats_a.application.input.ManageAFormatUCIntPort;
 import co.edu.unicauca.asae.app_formats_a.application.output.ManageAFormatGatewayIntPort;
 import co.edu.unicauca.asae.app_formats_a.application.output.ManageProfessorGatewayIntPort;
 import co.edu.unicauca.asae.app_formats_a.commons.enums.StateEnum;
 import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
-import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
 import co.edu.unicauca.asae.app_formats_a.domain.models.State;
 
 public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
@@ -30,13 +29,19 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
         if (aFormat.getObjProfessor() == null) {
             throw new IllegalArgumentException("El profesor no puede ser nulo");
         }
+
+        boolean existingProfessor = this.manageProfessorGateway.existsById(aFormat.getObjProfessor().getId());
+
+        if(!existingProfessor){
+            boolean exists = this.manageProfessorGateway.existsProfessorByEmail(aFormat.getObjProfessor().getEmail());
+            if (exists) {
+                throw new IllegalArgumentException("El email ya se encuentra registrado");
+            }
+        }
     
-        // Asignamos el estado
-        State state = new State(StateEnum.FORMULATED, LocalDate.now());
-        state.setObjAformat(aFormat);
+        State state = new State(null, StateEnum.FORMULATED, LocalDate.now(), aFormat);
         aFormat.setState(state);
     
-        // Aquí se persiste todo: el formato y, si aplica, el nuevo profesor
         AFormat savedFormat = this.manageAFormatGateway.save(aFormat);
     
         return savedFormat;

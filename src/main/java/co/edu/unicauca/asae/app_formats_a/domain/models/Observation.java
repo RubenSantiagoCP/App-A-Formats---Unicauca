@@ -8,15 +8,15 @@ public class Observation {
     private Long id;
     private String observation;
     private LocalDate observationDateRegister;
-    private List<Professor> proffesors;
+    private List<Professor> professors;
     private Evaluation objEvaluation;
 
-    public Observation(Long id, String observation, LocalDate observationDateRegister, List<Professor> proffesors,
+    public Observation(Long id, String observation, LocalDate observationDateRegister, List<Professor> professors,
             Evaluation objEvaluation) {
         this.id = id;
         this.observation = observation;
         this.observationDateRegister = observationDateRegister;
-        this.proffesors = proffesors;
+        this.professors = professors;
         this.objEvaluation = objEvaluation;
     }
 
@@ -44,12 +44,12 @@ public class Observation {
         this.observationDateRegister = observationDateRegister;
     }
 
-    public List<Professor> getProffesors() {
-        return proffesors;
+    public List<Professor> getProfessors() {
+        return professors;
     }
 
-    public void setProffesors(List<Professor> proffesors) {
-        this.proffesors = proffesors;
+    public void setProfessors(List<Professor> proffesors) {
+        this.professors = proffesors;
     }
 
     public Evaluation getObjEvaluation() {

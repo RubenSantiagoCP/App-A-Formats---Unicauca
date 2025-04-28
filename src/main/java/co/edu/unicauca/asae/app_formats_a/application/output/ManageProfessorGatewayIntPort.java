@@ -7,9 +7,16 @@ import java.util.Optional;
 
 public interface ManageProfessorGatewayIntPort {
 
-    public Optional<Professor> existsProfessorByEmail(String email);
+    public boolean existsProfessorByEmail(String email);
 
     public Professor save(Professor professor);
 
     public List<Professor> getByGroupAndStartWithPattern(String groupName, String pattern);
+
+    public Optional<Professor> findById(Long id);
+
+    public List<Professor> getAllProfessorsById(List<Long> ids);
+
+    public boolean existsById(Long id);
+
 }
