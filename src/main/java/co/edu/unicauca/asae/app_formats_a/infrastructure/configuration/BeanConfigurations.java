@@ -1,12 +1,9 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.configuration;
 
-import co.edu.unicauca.asae.app_formats_a.application.output.ManageProfessorGatewayIntPort;
+import co.edu.unicauca.asae.app_formats_a.application.output.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import co.edu.unicauca.asae.app_formats_a.application.output.ManageAFormatGatewayIntPort;
-import co.edu.unicauca.asae.app_formats_a.application.output.ManageEvaluationGatewayIntPort;
-import co.edu.unicauca.asae.app_formats_a.application.output.ManageObservationGatewayIntPort;
 import co.edu.unicauca.asae.app_formats_a.domain.useCases.ManageAFormatUCAdapter;
 import co.edu.unicauca.asae.app_formats_a.domain.useCases.ManageObservationUCAdapter;
 import co.edu.unicauca.asae.app_formats_a.domain.useCases.ManageProfessorUCAdapter;
@@ -23,10 +20,10 @@ public class BeanConfigurations {
     }
 
     @Bean
-    public ManageProfessorUCAdapter createManageProfessorUCAdapter(
-            ManageProfessorGatewayIntPort objManageProfessorGatewayIntPort) {
+    public ManageProfessorUCAdapter createManageProfessorUCAdapter(ManageProfessorGatewayIntPort objManageProfessorGatewayIntPort, ManageHistoricalRecordGatewayIntPort manageHistoricalRecordGateway) {
         ManageProfessorUCAdapter objManageProfessorUCAdapter = new ManageProfessorUCAdapter(
-                objManageProfessorGatewayIntPort);
+                objManageProfessorGatewayIntPort,
+                manageHistoricalRecordGateway);
         return objManageProfessorUCAdapter;
     }
 
