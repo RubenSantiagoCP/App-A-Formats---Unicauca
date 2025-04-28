@@ -13,4 +13,6 @@ public interface ManageProfessorUCIntPort {
     public List<AFormat> getAllAFormatsByProfessor(Long id);
 
     public List<AFormat> getAllAFormatsByProfessorBetweenDates(Long id, LocalDate startDate, LocalDate endDate);
+
+    public List<Professor> getByGroupAndStartWithPattern(String groupName, String pattern);
 }

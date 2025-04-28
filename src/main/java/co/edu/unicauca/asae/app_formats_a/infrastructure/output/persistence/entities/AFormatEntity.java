@@ -23,17 +23,17 @@ public class AFormatEntity {
     @Column(name = "general_objective", nullable = false)
     private String generalObjective;
 
-    @Column(name = "title", nullable = false, unique = true, length = 200)
+    @Column(name = "title", nullable = false, length = 200)
     private String title;
 
     @Column(name = "specific_objective", nullable = false)
     private List<String> specificObjective;
 
     @ManyToOne(cascade = { CascadeType.PERSIST })
-    @JoinColumn(name = "professorId", nullable = false)
+    @JoinColumn(name = "professorId", referencedColumnName = "id")
     private ProfessorEntity objProfessor;
 
-    @OneToOne(mappedBy = "objAformat", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+    @OneToOne(mappedBy = "objAformat", cascade = { CascadeType.ALL})
     private StateEntity state;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "objAFormat", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })

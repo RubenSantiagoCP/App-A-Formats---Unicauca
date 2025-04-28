@@ -2,6 +2,9 @@ package co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.map
 
 import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.ProfessorEntity;
+
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -29,4 +32,9 @@ public interface ProfessorOutputMapper {
     @Mapping(target = "historicalRecord", ignore = true)
     @Mapping(target = "aFormats", ignore = true)
     ProfessorEntity toEntity(Professor domain);
+
+    List<Professor> toDomainList(List<ProfessorEntity> entities);
+
+    List<ProfessorEntity> toEntityList(List<Professor> domainList);
+
 }

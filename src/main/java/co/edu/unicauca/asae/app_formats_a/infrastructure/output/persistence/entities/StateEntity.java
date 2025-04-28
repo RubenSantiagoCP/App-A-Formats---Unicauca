@@ -29,7 +29,7 @@ public class StateEntity {
     @Column(name = "register_state_date", nullable = false)
     private LocalDate registerStateDate;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.MERGE)
     @MapsId
     @JoinColumn(name = "formatAId", unique = true)
     private AFormatEntity objAformat;

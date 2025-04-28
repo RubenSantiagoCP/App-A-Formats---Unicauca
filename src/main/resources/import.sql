@@ -1,8 +1,8 @@
-INSERT INTO proffesors (id, proffesor_name, proffesor_last_name, proffesor_grouo_name, proffesor_email) VALUES (1, 'John', 'Doe', 'Mathematics', 'john.doe@example.com');
-INSERT INTO proffesors (id, proffesor_name, proffesor_last_name, proffesor_grouo_name, proffesor_email) VALUES (2, 'Jane', 'Smith', 'Physics', 'jane.smith@example.com');
-INSERT INTO proffesors (id, proffesor_name, proffesor_last_name, proffesor_grouo_name, proffesor_email) VALUES (3, 'Emily', 'Johnson', 'Chemistry', 'emily.johnson@example.com');
-INSERT INTO proffesors (id, proffesor_name, proffesor_last_name, proffesor_grouo_name, proffesor_email) VALUES (4, 'Michael', 'Brown', 'Biology', 'michael.brown@example.com');
-INSERT INTO proffesors (id, proffesor_name, proffesor_last_name, proffesor_grouo_name, proffesor_email) VALUES (5, 'Sarah', 'Davis', 'Computer Science', 'sarah.davis@example.com');
+INSERT INTO professors (id, professor_name, professor_last_name, professor_group_name, professor_email) VALUES (1, 'John', 'Doe', 'Mathematics', 'john.doe@example.com');
+INSERT INTO professors (id, professor_name, professor_last_name, professor_group_name, professor_email) VALUES (2, 'Jane', 'Smith', 'Physics', 'jane.smith@example.com');
+INSERT INTO professors (id, professor_name, professor_last_name, professor_group_name, professor_email) VALUES (3, 'Emily', 'Johnson', 'Chemistry', 'emily.johnson@example.com');
+INSERT INTO professors (id, professor_name, professor_last_name, professor_group_name, professor_email) VALUES (4, 'Michael', 'Brown', 'Biology', 'michael.brown@example.com');
+INSERT INTO professors (id, professor_name, professor_last_name, professor_group_name, professor_email) VALUES (5, 'Sarah', 'Davis', 'Computer Science', 'sarah.davis@example.com');
 
 
 INSERT INTO roles (id, assigned_role) VALUES (1, 'COORDINATOR');

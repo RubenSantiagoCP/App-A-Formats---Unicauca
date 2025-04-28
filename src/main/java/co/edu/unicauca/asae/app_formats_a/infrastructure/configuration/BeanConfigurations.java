@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 import co.edu.unicauca.asae.app_formats_a.application.output.ManageAFormatGatewayIntPort;
 import co.edu.unicauca.asae.app_formats_a.domain.useCases.ManageAFormatUCAdapter;
+import co.edu.unicauca.asae.app_formats_a.domain.useCases.ManageProfessorUCAdapter;
 
 @Configuration
 public class BeanConfigurations {
@@ -14,6 +15,12 @@ public class BeanConfigurations {
     public ManageAFormatUCAdapter createManageAFormatUCAdapter(ManageAFormatGatewayIntPort objAFormatGatewayIntPort, ManageProfessorGatewayIntPort objManageProfessorGatewayIntPort) {
         ManageAFormatUCAdapter objManageAFormatUCAdapter = new ManageAFormatUCAdapter(objAFormatGatewayIntPort, objManageProfessorGatewayIntPort);
         return objManageAFormatUCAdapter;
+    }
+
+    @Bean
+    public ManageProfessorUCAdapter createManageProfessorUCAdapter(ManageProfessorGatewayIntPort objManageProfessorGatewayIntPort) {
+        ManageProfessorUCAdapter objManageProfessorUCAdapter = new ManageProfessorUCAdapter(objManageProfessorGatewayIntPort);
+        return objManageProfessorUCAdapter;
     }
 
 }

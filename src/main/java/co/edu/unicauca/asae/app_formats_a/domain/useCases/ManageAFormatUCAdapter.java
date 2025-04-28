@@ -23,30 +23,23 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
 
     @Override
     public AFormat save(AFormat aFormat) {
-        AFormat objCreatedAFormat = null;
-        if(this.manageAFormatGateway.existsAFormatByTitle(aFormat.getTitle())){
+        if (this.manageAFormatGateway.existsAFormatByTitle(aFormat.getTitle())) {
             throw new IllegalArgumentException("El formato ya existe");
-        }else{
-            if(aFormat.getObjProfessor()==null){
-                throw new IllegalArgumentException("El profesor no puede ser nulo");
-            }
-
-            String email = aFormat.getObjProfessor().getEmail();
-            Optional<Professor> objProfessor = this.manageProfessorGateway.existsProfessorByEmail(email);
-
-            if(objProfessor.isPresent()){
-                aFormat.setObjProfessor(objProfessor.get());
-            }else{
-                aFormat.getObjProfessor().setAFormats(new ArrayList<>());
-            }
-
-            aFormat.getObjProfessor().addFormat(aFormat);
-            State state = new State(StateEnum.FORMULATED, LocalDate.now());
-            state.setObjAformat(aFormat);
-            aFormat.setState(state);
-            objCreatedAFormat = this.manageAFormatGateway.save(aFormat);
         }
-        return objCreatedAFormat;
+    
+        if (aFormat.getObjProfessor() == null) {
+            throw new IllegalArgumentException("El profesor no puede ser nulo");
+        }
+    
+        // Asignamos el estado
+        State state = new State(StateEnum.FORMULATED, LocalDate.now());
+        state.setObjAformat(aFormat);
+        aFormat.setState(state);
+    
+        // Aquí se persiste todo: el formato y, si aplica, el nuevo profesor
+        AFormat savedFormat = this.manageAFormatGateway.save(aFormat);
+    
+        return savedFormat;
     }
     
 }

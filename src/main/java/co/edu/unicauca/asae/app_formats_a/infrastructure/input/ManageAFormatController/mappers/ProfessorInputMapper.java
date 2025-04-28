@@ -1,5 +1,7 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.mappers;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -16,4 +18,8 @@ public interface ProfessorInputMapper {
     Professor toDomain(ProfessorDTORequest professorDTORequest);
 
     ProfessorDTOResponse toResponse(Professor professor);
+
+    List<Professor> toDomainList(List<ProfessorDTORequest> professorDTORequests);
+
+    List<ProfessorDTOResponse> toResponseList(List<Professor> professors);
 }

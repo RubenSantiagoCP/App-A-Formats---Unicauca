@@ -70,6 +70,7 @@ public class Professor {
 
     public void addFormat(AFormat aFormat) {
         this.aFormats.add(aFormat);
+        aFormat.setObjProfessor(this);
     }
 
 }

@@ -10,7 +10,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "proffesors")
+@Table(name = "professors")
 @Builder
 @Getter
 @Setter
@@ -21,22 +21,22 @@ public class ProfessorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "proffesor_name", length = 100, nullable = false)
+    @Column(name = "professor_name", length = 100, nullable = false)
     private String name;
 
-    @Column(name = "proffesor_last_name", length = 100, nullable = false)
+    @Column(name = "professor_last_name", length = 100, nullable = false)
     private String lastName;
 
-    @Column(name = "proffesor_grouo_name", length = 100, nullable = false)
+    @Column(name = "professor_group_name", length = 100, nullable = false)
     private String groupName;
 
 
-    @Column(name = "proffesor_email", unique = true, length = 100, nullable = false)
+    @Column(name = "professor_email", unique = true, length = 100, nullable = false)
     private String email;
 
     @OneToMany(mappedBy = "professor")
     private List<HistoricalRecordEntity> historicalRecord;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objProfessor", cascade = {CascadeType.REMOVE})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objProfessor", cascade = {CascadeType.REMOVE}, orphanRemoval = true)
     private List<AFormatEntity> aFormats;
 }
