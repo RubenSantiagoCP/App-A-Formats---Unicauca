@@ -18,7 +18,6 @@ public interface ObservationInputMapper {
     @Mapping(source = "professorsId", target = "professors")
     Observation toDomain(ObservationDTORequest observationDTORequest);
 
-    @Mapping(source = "professors", target = "professorsId")
     ObservationDTOResponse toResponse(Observation observation);
 
     default List<Professor> mapIdsToProfessors(List<Long> ids) {
@@ -29,13 +28,6 @@ public interface ObservationInputMapper {
                     p.setId(id);
                     return p;
                 })
-                .collect(Collectors.toList());
-    }
-
-    default List<Long> mapProfessorsToIds(List<Professor> professors) {
-        if (professors == null) return null;
-        return professors.stream()
-                .map(professor -> professor.getId())
                 .collect(Collectors.toList());
     }
 }

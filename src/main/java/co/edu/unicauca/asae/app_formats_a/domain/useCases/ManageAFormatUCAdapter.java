@@ -52,5 +52,11 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
     
         return savedFormat;
     }
+
+    @Override
+    public AFormat getById(Long id) {
+        AFormat aFormat = this.manageAFormatGateway.findById(id);
+        return aFormat;
+    }
     
 }

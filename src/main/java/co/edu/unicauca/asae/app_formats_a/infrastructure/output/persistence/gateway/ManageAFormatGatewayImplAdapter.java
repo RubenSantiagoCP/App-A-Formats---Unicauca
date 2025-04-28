@@ -31,7 +31,7 @@ public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntP
             aFormatEntity.setObjProfessor(professorEntity);
         }
         aFormatEntity = aFormatRepository.save(aFormatEntity);
-        return aFormatMapper.toDomain(aFormatEntity);
+        return aFormatMapper.toDomainCreate(aFormatEntity);
     } 
 
     @Override
@@ -42,7 +42,7 @@ public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntP
     @Override
     public AFormat findById(Long id) {
         AFormatEntity aFormat = aFormatRepository.findById(id).orElse(null);
-        return aFormatMapper.toDomain(aFormat);
+        return aFormatMapper.toDomainCreate(aFormat);
     }
 
     @Override

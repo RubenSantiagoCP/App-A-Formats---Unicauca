@@ -12,7 +12,6 @@ import lombok.*;
 public class ObservationDTOResponse {
     private Long id;
     private String observation;
-    private List<Long> professorsId;
-    private Long formatId;
+    private List<ProfessorDTOResponse> professors;
     private LocalDate observationRegisterDate;
 }

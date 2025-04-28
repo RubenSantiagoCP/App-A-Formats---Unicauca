@@ -12,7 +12,6 @@ import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatCont
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.TIAFormatDTOResponse;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.SubclassMapping;
 
@@ -20,11 +19,6 @@ import org.mapstruct.SubclassMapping;
 public interface AFormatInputMapper {
     @SubclassMapping(source = PPAFormatDTORequest.class, target = PPAFormat.class)
     @SubclassMapping(source = TIAFormatDTORequest.class, target = TIAFormat.class)
-    @Mapping(target = "objProfessor.historicalRecord", ignore = true)
-    @Mapping(target = "objProfessor.aFormats", ignore = true)
-    @Mapping(target = "state", ignore = true)
-    @Mapping(target = "evaluations", ignore = true)
-    @Mapping(target = "id", ignore = true)
     AFormat toDomain(AFormatDTORequest aFormatDTORequest);
 
     @SubclassMapping(source = PPAFormat.class, target = PPAFormatDTOResponse.class)

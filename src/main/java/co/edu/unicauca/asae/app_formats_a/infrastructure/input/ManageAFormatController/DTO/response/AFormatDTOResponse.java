@@ -24,4 +24,6 @@ public class AFormatDTOResponse {
     private ProfessorDTOResponse objProfessor;
 
     private StateDTOResponse state;
+
+    private List<EvaluationDTOResponse> evaluations;
 }

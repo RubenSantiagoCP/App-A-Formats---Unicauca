@@ -49,7 +49,7 @@ public class ManageObservationGatewayImplAdapter implements ManageObservationGat
         observationEntity.setProfessors(professors);
         
         observationEntity = observationRepository.save(observationEntity);
-        return observationMapper.toDomain(observationEntity);
+        return observationMapper.toDomainCreate(observationEntity);
 
     }
     
