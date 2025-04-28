@@ -9,6 +9,8 @@ import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatCont
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,5 +30,12 @@ public class AFormatRestController {
         AFormat savedAFormat = objManageAFormatUCIntPort.save(formatToSave);
         AFormatDTOResponse response = aFormatMapper.toResponse(savedAFormat);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AFormatDTOResponse> getAFormatById(@PathVariable Long id) {
+        AFormat aFormat = objManageAFormatUCIntPort.getById(id);
+        AFormatDTOResponse response = aFormatMapper.toResponse(aFormat);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

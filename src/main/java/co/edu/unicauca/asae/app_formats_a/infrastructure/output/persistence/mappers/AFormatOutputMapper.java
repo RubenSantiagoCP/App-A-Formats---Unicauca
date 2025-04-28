@@ -34,11 +34,12 @@ public interface AFormatOutputMapper {
     @Mapping(target = "evaluations.objAFormat", ignore = true)
     AFormatEntity toEntity(AFormat aFormat);
 
-    @Named("toDomainList")
-    @Mapping(target = "objProfessor.aFormats", ignore = true)
-    @Mapping(target = "objProfessor.historicalRecord", ignore = true)
-    @Mapping(target = "state.objAformat", ignore = true)
-    @Mapping(target = "evaluations", qualifiedByName = "mapListEvaluations")
-    AFormat toDomainList(AFormatEntity aFormatEntity);
+    // //@Named("toDomainList")
+    // @SubclassMapping(source = PPAFormatEntity.class, target = PPAFormat.class)
+    // @SubclassMapping(source = TIAFormatEntity.class, target = TIAFormat.class)
+    // @Mapping(target = "objProfessor" , qualifiedByName = "mapProfessor")
+    // @Mapping(target = "state.objAformat", ignore = true)
+    // @Mapping(target = "evaluations", qualifiedByName = "mapListEvaluations")
+    // AFormat toDomain(AFormatEntity aFormatEntity);
 
 }
