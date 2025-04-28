@@ -5,5 +5,5 @@ import co.edu.unicauca.asae.app_formats_a.domain.models.Observation;
 
 public interface ManageObservationGatewayIntPort {
     
-    public Observation save(Observation observation);
+    public Observation save(Observation observation, Long formatId);
 }

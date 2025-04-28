@@ -25,6 +25,7 @@ public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntP
     public AFormat save(AFormat aFormat) {
         AFormatEntity aFormatEntity = aFormatMapper.toEntity(aFormat);
         aFormatEntity.getState().setObjAformat(aFormatEntity);
+        aFormatEntity.getEvaluations().get(0).setObjAFormat(aFormatEntity);
         ProfessorEntity professorEntity = professorRepository.getReferenceById(aFormat.getObjProfessor().getId());
         if(professorEntity != null){
             aFormatEntity.setObjProfessor(professorEntity);

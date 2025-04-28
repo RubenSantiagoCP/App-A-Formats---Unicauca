@@ -31,7 +31,8 @@ public interface AFormatOutputMapper {
     @Mapping(target = "objProfessor.historicalRecord", ignore = true)
     @Mapping(target = "objProfessor.aFormats", ignore = true)
     @Mapping(target = "state.objAformat", ignore = true)
-    @Mapping(target = "evaluations", ignore = true)
+    @Mapping(target = "evaluations.observations", ignore = true)
+    @Mapping(target = "evaluations.objAFormat", ignore = true)
     AFormatEntity toEntity(AFormat aFormat);
 
     default List<AFormat> toDomainList(List<AFormatEntity> entities) {
