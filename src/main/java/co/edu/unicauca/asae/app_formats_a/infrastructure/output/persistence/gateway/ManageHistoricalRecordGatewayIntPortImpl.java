@@ -28,14 +28,7 @@ public class ManageHistoricalRecordGatewayIntPortImpl implements ManageHistorica
                 historicalRecordRepository.findByObjRole_AssignedRole(RoleEnum.COMMITTEE_MEMBER);
 
 
-        return dbHistoricalRecords
-                .flatMap(
-                        historicalRecordEntities ->
-                                Optional.of(
-                                        historicalRecordEntities.stream()
-                                                .map(historicalRecordOutputMapper::toDomain)
-                                                .toList()
-                                )
-                );
+        return dbHistoricalRecords.flatMap(entities -> Optional.of(historicalRecordOutputMapper.toDomainList(entities)));
+
     }
 }

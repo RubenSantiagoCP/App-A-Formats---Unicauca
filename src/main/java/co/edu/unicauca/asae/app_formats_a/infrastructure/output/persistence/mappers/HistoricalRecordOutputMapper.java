@@ -5,6 +5,8 @@ import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.enti
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses={ProfessorOutputMapper.class,RoleOutputMapper.class})
 public interface HistoricalRecordOutputMapper {
     // Define mapping methods here if needed
@@ -16,4 +18,7 @@ public interface HistoricalRecordOutputMapper {
     HistoricalRecord toDomain(HistoricalRecordEntity entity);
     HistoricalRecordEntity toEntity(HistoricalRecord domain);
 
+    List<HistoricalRecordEntity> toEntityList(List<HistoricalRecord> domain);
+
+    List<HistoricalRecord> toDomainList(List<HistoricalRecordEntity> entity);
 }
