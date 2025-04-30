@@ -5,12 +5,15 @@ import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.enti
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses={ProfessorOutputMapper.class,RoleOutputMapper.class})
 public interface HistoricalRecordOutputMapper {
     // Define mapping methods here if needed
     // For example, if you have a HistoricalRecordEntity and HistoricalRecord domain model
     // You can define methods like:
-    HistoricalRecord toDomain(HistoricalRecordEntity entity);
 
+    @Mapping(target = "professor",qualifiedByName = "toDomainIgnoringRecordsAndFormats")
+    @Mapping(target = "role", source ="objRole",qualifiedByName = "toDomainIgnoringHistoricalRecords")
+    HistoricalRecord toDomain(HistoricalRecordEntity entity);
     HistoricalRecordEntity toEntity(HistoricalRecord domain);
+
 }

@@ -1,6 +1,7 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.mappers;
 
 import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.ProfessorDTOResponse;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.ProfessorEntity;
 
 import java.util.List;
@@ -18,7 +19,12 @@ public interface ProfessorOutputMapper {
     @Mapping(target = "aFormats", ignore = true)
     Professor toDomain(ProfessorEntity entity);
 
-   
+
+    @Named("toDomainIgnoringRecordsAndFormats")
+    @Mapping(target = "historicalRecord", ignore = true)
+    @Mapping(target = "aFormats", ignore = true)
+    Professor toDomainIgnoringRecordsAndFormats(ProfessorEntity entity);
+
     ProfessorEntity toEntity(Professor domain);
 
     //List<Professor> toDomainList(List<ProfessorEntity> entities);

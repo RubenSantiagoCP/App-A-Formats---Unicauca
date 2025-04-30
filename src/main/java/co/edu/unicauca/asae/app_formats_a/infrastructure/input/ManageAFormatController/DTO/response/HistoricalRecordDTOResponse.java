@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response;
 
+import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.ProfessorEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
@@ -19,5 +20,8 @@ public class HistoricalRecordDTOResponse {
 
     private LocalDate endDate;
 
-    private ProfessorEntity professor;
+    private ProfessorDTOResponse professor;
+
+    private RoleDTOResponse role;
+
 }
