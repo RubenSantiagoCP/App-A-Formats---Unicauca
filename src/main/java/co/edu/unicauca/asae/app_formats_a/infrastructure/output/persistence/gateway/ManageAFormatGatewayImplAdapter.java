@@ -38,17 +38,20 @@ public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntP
     } 
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existsAFormatByTitle(String title) {
         return aFormatRepository.existsByTitle(title);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public AFormat findById(Long id) {
         AFormatEntity aFormat = aFormatRepository.findById(id).orElse(null);
         return aFormatMapper.toDomainCreate(aFormat);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existsById(Long id) {
         return aFormatRepository.existsById(id);
     }

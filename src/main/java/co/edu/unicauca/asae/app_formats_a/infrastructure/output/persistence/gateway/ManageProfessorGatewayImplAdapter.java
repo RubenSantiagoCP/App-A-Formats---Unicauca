@@ -21,13 +21,13 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     private final ProfessorOutputMapper professorOutputMapper;
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public boolean existsProfessorByEmail(String email) {
         return professorRepository.existsByEmail(email);
     }
 
     @Override
-    // @Transactional
+    @Transactional
     public Professor save(Professor professor) {
         ProfessorEntity professorEntity = professorOutputMapper.toEntity(professor);
         professorEntity = professorRepository.save(professorEntity);
@@ -42,6 +42,7 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Professor> findById(Long id) {
         Optional<ProfessorEntity> professor = professorRepository.findById(id);
         if (professor.isPresent()) {
@@ -51,12 +52,14 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Professor> getAllProfessorsById(List<Long> ids) {
         List<ProfessorEntity> professors = professorRepository.findAllById(ids);
         return professorOutputMapper.toDomainList(professors);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existsById(Long id) {
         return professorRepository.existsById(id);
     }

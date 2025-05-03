@@ -18,6 +18,7 @@ import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.repo
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.repositories.ObservationRepositoryInt;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.repositories.ProfessorRepositoryInt;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +31,7 @@ public class ManageObservationGatewayImplAdapter implements ManageObservationGat
     private final AFormatRepositoryInt aFormatRepository;
 
     @Override
+    @Transactional
     public Observation save(Observation observation, Long formatId) {
         ObservationEntity observationEntity = observationMapper.toEntity(observation);
         EvaluationEntity evaluationEntity = evaluationRepository.lastEvaluationByFormat(observation.getObjEvaluation().getId());

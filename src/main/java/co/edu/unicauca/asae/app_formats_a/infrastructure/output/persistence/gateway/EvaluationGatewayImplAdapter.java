@@ -9,6 +9,7 @@ import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.enti
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.mappers.EvaluationOutputMapper;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.repositories.EvaluationRepositoryInt;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -18,6 +19,7 @@ public class EvaluationGatewayImplAdapter implements ManageEvaluationGatewayIntP
     private final EvaluationOutputMapper evaluationOutputMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public Evaluation getLastEvaluationByFormat(Long id) {
         EvaluationEntity evaluation = evaluationRepository.lastEvaluationByFormat(id);
         return evaluationOutputMapper.toDomain(evaluation);

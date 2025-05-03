@@ -39,6 +39,7 @@ public abstract class AFormatDTORequest {
     private String title;
 
     @NotEmpty(message = "format.specificObjective.required")
+    @Size(min = 3, max=6, message = "format.specificObjective.sizeElements")
     private List<
                 @Size(min = 3, max = 100, message = "format.specificObjective.size") 
                 @NotBlank(message = "format.specificObjective.required") 

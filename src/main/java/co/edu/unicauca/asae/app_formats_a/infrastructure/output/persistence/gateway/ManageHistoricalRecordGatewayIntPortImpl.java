@@ -10,6 +10,7 @@ import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.mapp
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.repositories.HistoricalRecordRepositoryInt;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,7 @@ public class ManageHistoricalRecordGatewayIntPortImpl implements ManageHistorica
     private final ProfessorOutputMapper professorOutputMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<List<HistoricalRecord>> getCommiteeMembers() {
 
         Optional<List<HistoricalRecordEntity>> dbHistoricalRecords =
