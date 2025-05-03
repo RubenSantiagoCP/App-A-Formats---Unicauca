@@ -10,6 +10,7 @@ import co.edu.unicauca.asae.app_formats_a.commons.enums.ConceptEnum;
 import co.edu.unicauca.asae.app_formats_a.commons.enums.StateEnum;
 import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
 import co.edu.unicauca.asae.app_formats_a.domain.models.Evaluation;
+import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
 import co.edu.unicauca.asae.app_formats_a.domain.models.State;
 
 public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
@@ -27,36 +28,34 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
         if (this.manageAFormatGateway.existsAFormatByTitle(aFormat.getTitle())) {
             throw new IllegalArgumentException("El formato ya existe");
         }
-    
-        if (aFormat.getObjProfessor() == null) {
-            throw new IllegalArgumentException("El profesor no puede ser nulo");
-        }
-
-        boolean existingProfessor = this.manageProfessorGateway.existsById(aFormat.getObjProfessor().getId());
-
-        if(!existingProfessor){
-            boolean exists = this.manageProfessorGateway.existsProfessorByEmail(aFormat.getObjProfessor().getEmail());
-            if (exists) {
-                throw new IllegalArgumentException("El email ya se encuentra registrado");
-            }
-        }
-
-        Evaluation evaluation = new Evaluation(null, ConceptEnum.UNESTABLISHED, LocalDate.now(), "n/a", null, null);
-    
-        State state = new State(null, StateEnum.FORMULATED, LocalDate.now(), aFormat);
-        aFormat.setState(state);
-        aFormat.setEvaluations(new ArrayList<>());
-        aFormat.getEvaluations().add(evaluation);
-    
-        AFormat savedFormat = this.manageAFormatGateway.save(aFormat);
-    
-        return savedFormat;
+        validateProfessor(aFormat.getObjProfessor());
+        aFormat.initialize();
+        return this.manageAFormatGateway.save(aFormat);
     }
 
     @Override
     public AFormat getById(Long id) {
         AFormat aFormat = this.manageAFormatGateway.findById(id);
         return aFormat;
+    }
+
+    private void validateProfessor(Professor professor) {
+        if (professor == null) {
+            throw new IllegalArgumentException("El profesor no puede ser nulo");
+        }
+
+        boolean emailExists = this.manageProfessorGateway.existsProfessorByEmail(professor.getEmail());
+
+        if (professor.getId() == null && emailExists) {
+            throw new IllegalArgumentException("El email ya se encuentra registrado");
+        }
+
+        if (professor.getId() != null) {
+            boolean idExists = this.manageProfessorGateway.existsById(professor.getId());
+            if (!idExists && emailExists) {
+                throw new IllegalArgumentException("El email ya se encuentra registrado");
+            }
+        }
     }
     
 }

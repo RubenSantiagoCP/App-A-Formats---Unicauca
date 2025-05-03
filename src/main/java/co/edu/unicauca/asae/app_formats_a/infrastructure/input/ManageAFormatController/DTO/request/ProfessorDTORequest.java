@@ -16,7 +16,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ProfessorDTORequest {
 
-    @NotNull(message = "professor.id.required")
     private Long id;
 
     @Size(min = 3, max = 100, message = "professor.name.size")

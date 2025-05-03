@@ -1,5 +1,10 @@
 package co.edu.unicauca.asae.app_formats_a.domain.models;
 
+import co.edu.unicauca.asae.app_formats_a.commons.enums.ConceptEnum;
+import co.edu.unicauca.asae.app_formats_a.commons.enums.StateEnum;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AFormat {
@@ -73,6 +78,12 @@ public class AFormat {
 
     public void setEvaluations(List<Evaluation> evaluations) {
         this.evaluations = evaluations;
+    }
+
+    public void initialize() {
+        this.setState(new State(null, StateEnum.FORMULATED, LocalDate.now(), this));
+        Evaluation ev = new Evaluation(null, ConceptEnum.UNESTABLISHED, LocalDate.now(), "n/a", null, null);
+        this.setEvaluations(new ArrayList<>(List.of(ev)));
     }
 
 }

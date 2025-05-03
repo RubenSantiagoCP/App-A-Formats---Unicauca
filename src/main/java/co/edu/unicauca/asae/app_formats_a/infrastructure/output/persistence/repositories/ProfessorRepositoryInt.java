@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface ProfessorRepositoryInt extends JpaRepository<ProfessorEntity, Long> {
 
-    @Query("SELECT count(p)<0 FROM ProfessorEntity p WHERE p.email = :email")
+    @Query("SELECT count(p)>0 FROM ProfessorEntity p WHERE p.email = :email")
     boolean existsByEmail(@Param("email") String email);
 
     List<ProfessorEntity> findByGroupNameAndLastNameStartingWithIgnoreCaseOrderByLastNameAsc(String groupName, String pattern);
