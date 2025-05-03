@@ -16,9 +16,10 @@ public class AFormat {
     private Professor objProfessor;
     private State state;
     private List<Evaluation> evaluations;
+    private String student1Name;
+    private Long student1code;
 
-    public AFormat(Long id, String generalObjective, String title, List<String> specificObjective,
-            Professor objProfessor, State state, List<Evaluation> evaluations) {
+    public AFormat(Long id, String generalObjective, String title, List<String> specificObjective, Professor objProfessor, State state, List<Evaluation> evaluations, String student1Name, Long student1code) {
         this.id = id;
         this.generalObjective = generalObjective;
         this.title = title;
@@ -26,6 +27,24 @@ public class AFormat {
         this.objProfessor = objProfessor;
         this.state = state;
         this.evaluations = evaluations;
+        this.student1Name = student1Name;
+        this.student1code = student1code;
+    }
+
+    public String getStudent1Name() {
+        return student1Name;
+    }
+
+    public void setStudent1Name(String student1Name) {
+        this.student1Name = student1Name;
+    }
+
+    public Long getStudent1code() {
+        return student1code;
+    }
+
+    public void setStudent1code(Long student1code) {
+        this.student1code = student1code;
     }
 
     public Long getId() {

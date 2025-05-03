@@ -10,7 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @JsonTypeName("TIA")
 public class TIAFormatDTOResponse extends AFormatDTOResponse {
-    private String student1Name;
-
     private String student2Name;
+    private String student2code;
 }

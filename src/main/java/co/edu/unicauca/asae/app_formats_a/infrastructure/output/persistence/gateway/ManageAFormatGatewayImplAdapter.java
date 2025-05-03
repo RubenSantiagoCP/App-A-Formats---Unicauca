@@ -40,7 +40,9 @@ public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntP
     @Override
     @Transactional(readOnly = true)
     public boolean existsAFormatByTitle(String title) {
-        return aFormatRepository.existsByTitle(title);
+        Long result = aFormatRepository.existsByTitle(title);
+        if(result>0) return true;
+        return false;
     }
 
     @Override

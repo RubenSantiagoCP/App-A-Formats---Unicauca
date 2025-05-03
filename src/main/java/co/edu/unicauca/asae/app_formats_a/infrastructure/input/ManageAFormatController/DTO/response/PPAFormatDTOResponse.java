@@ -13,7 +13,5 @@ public class PPAFormatDTOResponse extends AFormatDTOResponse {
     
     private String assesorName;
 
-    private String student1Name;
-
     private String acceptanceLetterRoute;
 }

@@ -4,23 +4,13 @@ import java.util.List;
 
 public class TIAFormat extends AFormat {
 
-    private String student1Name;
     private String student2Name;
+    private Long student2Code;
 
-    public TIAFormat(Long id, String generalObjective, String title, List<String> specificObjective,
-            Professor objProfessor, State state, List<Evaluation> evaluations, String student1Name,
-            String student2Name) {
-        super(id, generalObjective, title, specificObjective, objProfessor, state, evaluations);
-        this.student1Name = student1Name;
+    public TIAFormat(Long id, String generalObjective, String title, List<String> specificObjective, Professor objProfessor, State state, List<Evaluation> evaluations, String student1Name, Long student1code, String student2Name, Long student2Code) {
+        super(id, generalObjective, title, specificObjective, objProfessor, state, evaluations, student1Name, student1code);
         this.student2Name = student2Name;
-    }
-
-    public String getStudent1Name() {
-        return student1Name;
-    }
-
-    public void setStudent1Name(String student1Name) {
-        this.student1Name = student1Name;
+        this.student2Code = student2Code;
     }
 
     public String getStudent2Name() {

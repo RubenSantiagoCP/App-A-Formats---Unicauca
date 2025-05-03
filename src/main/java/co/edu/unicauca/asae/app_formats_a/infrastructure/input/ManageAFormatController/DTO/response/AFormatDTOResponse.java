@@ -40,4 +40,8 @@ public class AFormatDTOResponse {
     private StateDTOResponse state;
 
     private List<EvaluationDTOResponse> evaluations;
+
+    private String student1Name;
+
+    private String student1code;
 }

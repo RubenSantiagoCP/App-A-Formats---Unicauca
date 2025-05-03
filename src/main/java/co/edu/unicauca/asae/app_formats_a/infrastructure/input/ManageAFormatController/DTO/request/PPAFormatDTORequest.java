@@ -19,10 +19,6 @@ public class PPAFormatDTORequest extends AFormatDTORequest {
     @NotBlank(message = "PPAformat.assesorName.required")
     private String assesorName;
 
-    @Size(min = 3, max = 100, message = "PPAformat.studentName.size")
-    @NotBlank(message = "PPAformat.studentName.required")
-    private String student1Name;
-
     @Size(min = 3, max = 100, message = "PPAformat.acceptanceLetterRoute.size")
     @NotBlank(message = "PPAformat.acceptanceLetterRoute.required")
     private String acceptanceLetterRoute;

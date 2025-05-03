@@ -39,4 +39,10 @@ public class AFormatEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "objAFormat", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
     private List<EvaluationEntity> evaluations;
 
+    @Column(name = "student1_name", nullable = false)
+    private String student1Name;
+
+    @Column(name = "student1_code", nullable = false)
+    private String student1code;
+
 }

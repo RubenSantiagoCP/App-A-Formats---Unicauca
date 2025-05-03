@@ -3,10 +3,8 @@ package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatCon
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.validations.ObjectiveStartsWithInfinitiveInt;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.util.List;
@@ -46,5 +44,14 @@ public abstract class AFormatDTORequest {
                 @ObjectiveStartsWithInfinitiveInt(message = "objective.startsWith.infinitive") String> specificObjective;
 
     @NotNull(message = "format.objProfessor.required")
+    @Valid
     private ProfessorDTORequest objProfessor;
+
+    @Size(min = 3, max = 100, message = "AFormat.studentName.size")
+    @NotBlank(message = "AFormat.studentName.required")
+    private String student1Name;
+
+    @NotEmpty(message = "AFormat.studentCode.required")
+    @Pattern(regexp = "^1046\\d*$", message = "AFormat.studentCode.mustStartWith1046")
+    private String student1code;
 }

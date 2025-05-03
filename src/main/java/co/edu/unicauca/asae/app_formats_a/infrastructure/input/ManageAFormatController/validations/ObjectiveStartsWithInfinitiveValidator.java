@@ -15,10 +15,10 @@ public class ObjectiveStartsWithInfinitiveValidator
         }
 
         String lastTwoLetters = firstWord.substring(firstWord.length() - 2);
-        if (!lastTwoLetters.equals("ar") || !lastTwoLetters.equals("er") || !lastTwoLetters.equals("ir")) {
-            return false;
+        if (lastTwoLetters.equals("ar") || lastTwoLetters.equals("er") || lastTwoLetters.equals("ir")) {
+            return true;
         }
-        return true;
+        return false;
     }
 
 }
