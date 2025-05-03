@@ -6,10 +6,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {ObservationWithoutRelationsMapper.class})
 public interface EvaluationsWithoutRelations {
     @Named("mapEvaluationsToDomainWithoutRelations")
-    @Mapping(target = "observations", ignore = true)
     @Mapping(target = "objAFormat", ignore = true)
     Evaluation toDomain(EvaluationEntity entity);
 }

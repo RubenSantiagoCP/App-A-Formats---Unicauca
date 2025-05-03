@@ -14,5 +14,5 @@ public class ObservationDTOCreateResponse {
     private String observation;
     private List<ProfessorDTOResponse> professors;
     private LocalDate observationDateRegister;
-    private EvaluationDTOResponse objEvaluation;
+    private EvaluationWithoutRelationsDTOResponse objEvaluation;
 }

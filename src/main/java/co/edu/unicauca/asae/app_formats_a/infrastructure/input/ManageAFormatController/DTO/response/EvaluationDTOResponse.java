@@ -17,5 +17,5 @@ public class EvaluationDTOResponse {
     private Long id;
     private ConceptEnum concept;
     private String coordinatorName;
-    private List<ObservationDTOCreateResponse> observations;
+    private List<ObservationDTOWithoutRelations> observations;
 }
