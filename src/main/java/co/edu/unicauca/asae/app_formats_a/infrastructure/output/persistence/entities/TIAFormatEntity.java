@@ -22,6 +22,6 @@ public class TIAFormatEntity extends AFormatEntity {
     @Column(name = "student1_name", nullable = false)
     private String student1Name;
 
-    @Column(name = "student2_name", nullable = false)
+    @Column(name = "student2_name")
     private String student2Name;
 }

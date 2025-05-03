@@ -34,7 +34,7 @@ public class ProfessorEntity {
     @Column(name = "professor_email", unique = true, length = 100, nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "professor")
+    @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY)
     private List<HistoricalRecordEntity> historicalRecord;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "objProfessor")

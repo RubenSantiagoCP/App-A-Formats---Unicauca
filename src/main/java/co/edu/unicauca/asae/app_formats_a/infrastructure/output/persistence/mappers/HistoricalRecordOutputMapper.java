@@ -4,6 +4,7 @@ import co.edu.unicauca.asae.app_formats_a.domain.models.HistoricalRecord;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.HistoricalRecordEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 
 import java.util.List;
 

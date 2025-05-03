@@ -9,9 +9,10 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ObservationDTOResponse {
+public class ObservationDTOCreateResponse {
     private Long id;
     private String observation;
     private List<ProfessorDTOResponse> professors;
-    private LocalDate observationRegisterDate;
+    private LocalDate observationDateRegister;
+    private EvaluationDTOResponse objEvaluation;
 }

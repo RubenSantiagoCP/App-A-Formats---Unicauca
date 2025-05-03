@@ -10,7 +10,7 @@ import org.mapstruct.ReportingPolicy;
 import co.edu.unicauca.asae.app_formats_a.domain.models.Observation;
 import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.request.ObservationDTORequest;
-import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.ObservationDTOResponse;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.ObservationDTOCreateResponse;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ObservationInputMapper {
@@ -18,7 +18,8 @@ public interface ObservationInputMapper {
     @Mapping(source = "professorsId", target = "professors")
     Observation toDomain(ObservationDTORequest observationDTORequest);
 
-    ObservationDTOResponse toResponse(Observation observation);
+    @Mapping(source = "objEvaluation", target = "objEvaluation")
+    ObservationDTOCreateResponse toResponse(Observation observation);
 
     default List<Professor> mapIdsToProfessors(List<Long> ids) {
         if (ids == null) return null;

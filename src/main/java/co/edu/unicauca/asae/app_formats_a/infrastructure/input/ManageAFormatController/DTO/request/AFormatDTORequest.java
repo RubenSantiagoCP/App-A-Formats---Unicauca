@@ -1,6 +1,8 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.request;
 
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.validations.ObjectiveStartsWithInfinitiveInt;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -9,11 +11,23 @@ import lombok.*;
 
 import java.util.List;
 
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = PPAFormatDTORequest.class, name = "PPA"),
+        @JsonSubTypes.Type(value = TIAFormatDTORequest.class, name = "TIA"),
+})
+
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AFormatDTORequest {
+public abstract class AFormatDTORequest {
 
     @Size(min = 3, max = 100, message = "format.generalObjective.size")
     @NotBlank(message = "format.generalObjective.required")

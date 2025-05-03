@@ -31,7 +31,7 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     public Professor save(Professor professor) {
         ProfessorEntity professorEntity = professorOutputMapper.toEntity(professor);
         professorEntity = professorRepository.save(professorEntity);
-        return professorOutputMapper.toDomain(professorEntity);
+        return professorOutputMapper.toDomainIgnoringRecordsAndFormats(professorEntity);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     public Optional<Professor> findById(Long id) {
         Optional<ProfessorEntity> professor = professorRepository.findById(id);
         if (professor.isPresent()) {
-            return Optional.of(professorOutputMapper.toDomain(professor.get()));
+            return Optional.of(professorOutputMapper.toDomainIgnoringRecordsAndFormats(professor.get()));
         }
         return Optional.empty();
     }

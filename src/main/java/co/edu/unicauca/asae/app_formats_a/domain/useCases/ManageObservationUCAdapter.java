@@ -49,6 +49,9 @@ public class ManageObservationUCAdapter implements ManageObservationUCIntPort {
         if(evaluation==null){
             System.out.println("Entra aqui");
             evaluation = new Evaluation(null, ConceptEnum.UNESTABLISHED, LocalDate.now(), observation.getObservation(), null, null);
+        }else{
+            evaluation.setConcept(ConceptEnum.TO_BE_FIXED);
+            evaluation.setDateRegisterConcept(LocalDate.now());
         }
 
         observation.setObservationDateRegister(LocalDate.now());

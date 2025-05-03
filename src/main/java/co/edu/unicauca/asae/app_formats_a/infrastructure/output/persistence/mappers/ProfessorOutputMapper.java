@@ -14,12 +14,6 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProfessorOutputMapper {
 
-    @Named("mapProfessor")
-    @Mapping(target = "historicalRecord", ignore = true) 
-    @Mapping(target = "aFormats", ignore = true)
-    Professor toDomain(ProfessorEntity entity);
-
-
     @Named("toDomainIgnoringRecordsAndFormats")
     @Mapping(target = "historicalRecord", ignore = true)
     @Mapping(target = "aFormats", ignore = true)
@@ -35,7 +29,7 @@ public interface ProfessorOutputMapper {
     default List<Professor> toDomainList(List<ProfessorEntity> entities) {
         if (entities == null) return null;
         return entities.stream()
-                .map(this::toDomain)
+                .map(this::toDomainIgnoringRecordsAndFormats)
                 .toList();
     }
 

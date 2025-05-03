@@ -12,16 +12,11 @@ import co.edu.unicauca.asae.app_formats_a.domain.models.Observation;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.ObservationEntity;
 
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {
-        ProfessorOutputMapper.class })
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE , uses = {ProfessorWithoutObjectsMapper.class, EvaluationsWithoutRelations.class})
 public interface ObservationOutputMapper {
 
-    @Mapping(target = "professors", qualifiedByName = "mapProfessors")
-    @Mapping(target = "objEvaluation", ignore = true)
-    Observation toDomain(ObservationEntity entity);
-
-    @Mapping(target = "professors", ignore = true)
-    @Mapping(target = "objEvaluation", ignore = true)
+    @Mapping(target = "professors", qualifiedByName = "mapProfessorWithoutRelations")
+    @Mapping(target = "objEvaluation", qualifiedByName = "mapEvaluationsToDomainWithoutRelations")
     Observation toDomainCreate(ObservationEntity entity);
 
     @Mapping(target = "professors.historicalRecord", ignore = true)
@@ -33,7 +28,7 @@ public interface ObservationOutputMapper {
     default List<Observation> toDomainList(List<ObservationEntity> entities) {
         if (entities == null) return null;
         return entities.stream()
-                .map(this::toDomain)
+                .map(this::toDomainCreate)
                 .toList();
     }
 }

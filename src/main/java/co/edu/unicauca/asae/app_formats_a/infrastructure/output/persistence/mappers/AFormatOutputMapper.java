@@ -14,15 +14,17 @@ import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.SubclassMapping;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = { EvaluationOutputMapper.class,
-        ProfessorOutputMapper.class })
+import java.util.List;
+
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = { StateOutputMapper.class, ProfessorWithoutObjectsMapper.class, EvaluationsWithoutRelations.class})
 public interface AFormatOutputMapper {
 
     @Named("toDomainCreate")
     @SubclassMapping(source = PPAFormatEntity.class, target = PPAFormat.class)
     @SubclassMapping(source = TIAFormatEntity.class, target = TIAFormat.class)
-    @Mapping(target = "objProfessor", ignore = true)
-    @Mapping(target = "state.objAformat", ignore = true)
+    @Mapping(target = "objProfessor", qualifiedByName = "mapProfessorWithoutRelations")
+    @Mapping(target = "state", qualifiedByName = "mapStateWithoutRelations")
+    @Mapping(target = "evaluations", qualifiedByName = "mapEvaluationsToDomainWithoutRelations")
     AFormat toDomainCreate(AFormatEntity aFormatEntity);
 
     @SubclassMapping(source = PPAFormat.class, target = PPAFormatEntity.class)
@@ -34,12 +36,11 @@ public interface AFormatOutputMapper {
     @Mapping(target = "evaluations.objAFormat", ignore = true)
     AFormatEntity toEntity(AFormat aFormat);
 
-    // //@Named("toDomainList")
-    // @SubclassMapping(source = PPAFormatEntity.class, target = PPAFormat.class)
-    // @SubclassMapping(source = TIAFormatEntity.class, target = TIAFormat.class)
-    // @Mapping(target = "objProfessor" , qualifiedByName = "mapProfessor")
-    // @Mapping(target = "state.objAformat", ignore = true)
-    // @Mapping(target = "evaluations", qualifiedByName = "mapListEvaluations")
-    // AFormat toDomain(AFormatEntity aFormatEntity);
-
+    @Named("mapAFormatsListToDomain")
+    default List<AFormat> toDomainList(List<AFormatEntity> aFormatEntities){
+        if(aFormatEntities== null) return  null;
+        return aFormatEntities.stream()
+                .map(this::toDomainCreate)
+                .toList();
+    }
 }

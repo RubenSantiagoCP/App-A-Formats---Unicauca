@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unicauca.asae.app_formats_a.application.input.ManageObservationUCIntPort;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.request.ObservationDTORequest;
-import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.ObservationDTOResponse;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.ObservationDTOCreateResponse;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.mappers.ObservationInputMapper;
 import lombok.RequiredArgsConstructor;
 
@@ -23,8 +23,8 @@ public class ObservationRestController {
     private final ObservationInputMapper observationInputMapper;
 
     @PostMapping
-    public ResponseEntity<ObservationDTOResponse> save(@RequestBody ObservationDTORequest observationDTORequest, @RequestParam("formatId") Long formatId) {
-        ObservationDTOResponse observationDTOResponse = observationInputMapper.toResponse(this.manageObservationUCIntPort.save(observationInputMapper.toDomain(observationDTORequest), formatId));
-        return new ResponseEntity<>(observationDTOResponse, HttpStatus.CREATED);
+    public ResponseEntity<ObservationDTOCreateResponse> save(@RequestBody ObservationDTORequest observationDTORequest, @RequestParam("formatId") Long formatId) {
+        ObservationDTOCreateResponse observationDTOCreateResponse = observationInputMapper.toResponse(this.manageObservationUCIntPort.save(observationInputMapper.toDomain(observationDTORequest), formatId));
+        return new ResponseEntity<>(observationDTOCreateResponse, HttpStatus.CREATED);
     }
 }

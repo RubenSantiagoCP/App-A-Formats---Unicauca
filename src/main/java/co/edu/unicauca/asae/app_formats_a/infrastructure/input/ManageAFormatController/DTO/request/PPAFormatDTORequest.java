@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.request;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonTypeName("PPA")
 public class PPAFormatDTORequest extends AFormatDTORequest {
     
     @Size(min = 3, max = 100, message = "PPAformat.assesorName.size")
@@ -19,7 +21,7 @@ public class PPAFormatDTORequest extends AFormatDTORequest {
 
     @Size(min = 3, max = 100, message = "PPAformat.studentName.size")
     @NotBlank(message = "PPAformat.studentName.required")
-    private String studedt1Name;
+    private String student1Name;
 
     @Size(min = 3, max = 100, message = "PPAformat.acceptanceLetterRoute.size")
     @NotBlank(message = "PPAformat.acceptanceLetterRoute.required")

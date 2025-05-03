@@ -1,6 +1,7 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.request;
 
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonTypeName("TIA")
 public class TIAFormatDTORequest extends AFormatDTORequest {
 
     @Size(min = 3, max = 100, message = "TIAformat.studentName.size")

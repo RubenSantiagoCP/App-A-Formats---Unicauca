@@ -24,8 +24,8 @@ public class PPAFormatEntity extends AFormatEntity {
     @Column(name = "assesor_name", nullable = false)
     private String assesorName;
 
-    @Column(name="studedt1_name", nullable = false)
-    private String studedt1Name;
+    @Column(name="student1_name", nullable = false)
+    private String student1Name;
 
     @Column(name="acceptance_letter_route", nullable = false)
     private String acceptanceLetterRoute;

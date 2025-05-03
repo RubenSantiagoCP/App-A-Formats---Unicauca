@@ -8,6 +8,7 @@ import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatCont
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.request.PPAFormatDTORequest;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.request.TIAFormatDTORequest;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.AFormatDTOResponse;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.AFormatWithoutRelationsDTOResponse;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.PPAFormatDTOResponse;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.TIAFormatDTOResponse;
 
@@ -24,5 +25,6 @@ public interface AFormatInputMapper {
     @SubclassMapping(source = PPAFormat.class, target = PPAFormatDTOResponse.class)
     @SubclassMapping(source = TIAFormat.class, target = TIAFormatDTOResponse.class)
     AFormatDTOResponse toResponse(AFormat aFormat);
+
 
 }

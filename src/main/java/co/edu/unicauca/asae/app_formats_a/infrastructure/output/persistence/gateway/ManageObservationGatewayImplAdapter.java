@@ -33,6 +33,8 @@ public class ManageObservationGatewayImplAdapter implements ManageObservationGat
     public Observation save(Observation observation, Long formatId) {
         ObservationEntity observationEntity = observationMapper.toEntity(observation);
         EvaluationEntity evaluationEntity = evaluationRepository.lastEvaluationByFormat(observation.getObjEvaluation().getId());
+        evaluationEntity.setConcept(observation.getObjEvaluation().getConcept());
+        evaluationEntity.setDateRegisterConcept(observation.getObjEvaluation().getDateRegisterConcept());
         AFormatEntity aFormatEntity = aFormatRepository.getReferenceById(formatId);
         evaluationEntity.setObjAFormat(aFormatEntity);
         observationEntity.setObjEvaluation(evaluationEntity);
