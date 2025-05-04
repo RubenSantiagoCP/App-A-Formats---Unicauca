@@ -28,6 +28,7 @@ public interface AFormatInputMapper {
     @SubclassMapping(source = TIAFormat.class, target = TIAFormatDTOResponse.class)
     AFormatDTOResponse toResponse(AFormat aFormat);
 
+
     default List<AFormatDTOResponse> lstAFormatsToResponse(List<AFormat> aFormats){
         if(aFormats==null) return  null;
         return aFormats.stream()

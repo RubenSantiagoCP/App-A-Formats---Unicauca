@@ -11,5 +11,4 @@ public interface HistoricalRecordWithoutRelations {
     @Mapping(target = "professor", ignore = true)
     @Mapping(target = "role", ignore = true)
     HistoricalRecord toDomain(HistoricalRecordEntity historicalRecordEntity);
-
 }

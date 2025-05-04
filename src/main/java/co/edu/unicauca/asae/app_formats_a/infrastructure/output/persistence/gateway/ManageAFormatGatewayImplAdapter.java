@@ -12,6 +12,10 @@ import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.repo
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.repositories.ProfessorRepositoryInt;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntPort {
@@ -57,5 +61,13 @@ public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntP
     public boolean existsById(Long id) {
         return aFormatRepository.existsById(id);
     }
-    
+
+    @Override
+    public Optional<List<AFormat>> findAllByProffesorBetween(Long id, LocalDate startDate, LocalDate endDate) {
+        Optional<List<AFormatEntity>> dbFormats = aFormatRepository.findByTitleDatesAndProfessor(null, startDate, endDate, id);
+        return dbFormats.flatMap(entities ->
+                Optional.of(aFormatMapper.toDomainListIgnoringDependencies(entities)));
+
+    }
+
 }

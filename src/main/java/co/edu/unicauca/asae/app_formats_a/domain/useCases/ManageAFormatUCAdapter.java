@@ -2,6 +2,7 @@ package co.edu.unicauca.asae.app_formats_a.domain.useCases;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import co.edu.unicauca.asae.app_formats_a.application.input.ManageAFormatUCIntPort;
 import co.edu.unicauca.asae.app_formats_a.application.output.ManageAFormatGatewayIntPort;
@@ -44,6 +45,11 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
             resultsFormatter.returnResponseErrorEntityNotFound("Format with ID "+id+" doesn't exist");
         }
         return this.manageAFormatGateway.findById(id);
+    }
+
+    @Override
+    public List<AFormat> getAllByProffesorBetween(Long id,LocalDate startDate, LocalDate endDate) {
+        return this.manageAFormatGateway.findAllByProffesorBetween( id,  startDate,  endDate).orElseThrow();
     }
 
     private void validateProfessor(Professor professor) {

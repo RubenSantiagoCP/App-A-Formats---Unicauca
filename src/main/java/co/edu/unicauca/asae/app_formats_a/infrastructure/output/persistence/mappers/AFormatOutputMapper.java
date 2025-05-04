@@ -5,19 +5,16 @@ import co.edu.unicauca.asae.app_formats_a.domain.models.TIAFormat;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.PPAFormatEntity;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.TIAFormatEntity;
 
-import org.mapstruct.Mapper;
+import org.mapstruct.*;
 
 import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.AFormatEntity;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-import org.mapstruct.ReportingPolicy;
-import org.mapstruct.SubclassMapping;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = { StateOutputMapper.class, ProfessorWithoutObjectsMapper.class, EvaluationsWithoutRelations.class})
 public interface AFormatOutputMapper {
+
 
     @Named("toDomainCreate")
     @SubclassMapping(source = PPAFormatEntity.class, target = PPAFormat.class)
@@ -43,4 +40,16 @@ public interface AFormatOutputMapper {
                 .map(this::toDomainCreate)
                 .toList();
     }
+
+    @Named("toDomainIgnoringDependencies")
+    @Mapping(target = "objProfessor", ignore = true)
+    @Mapping(target = "evaluations", ignore = true)
+    AFormat toDomainIgnoringDependencies(AFormatEntity aFormatEntity);
+
+    @Named("toDomainListIgnoringDependencies")
+    @IterableMapping(qualifiedByName = "toDomainIgnoringDependencies")
+    List<AFormat> toDomainListIgnoringDependencies(List<AFormatEntity> aFormatEntities);
+
+
+
 }

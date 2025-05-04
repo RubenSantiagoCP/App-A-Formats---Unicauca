@@ -11,12 +11,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/aformat")
@@ -39,6 +37,21 @@ public class AFormatRestController {
     public ResponseEntity<AFormatDTOResponse> getAFormatById(@PathVariable Long id) {
         AFormat aFormat = objManageAFormatUCIntPort.getById(id);
         AFormatDTOResponse response = aFormatMapper.toResponse(aFormat);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
+
+
+    @GetMapping
+    public ResponseEntity<List<AFormatDTOResponse>> getFormatsByProfessorAndDateRange(
+            @RequestParam("professorId") Long professorId,
+            @RequestParam("startDate") LocalDate startDate,
+            @RequestParam("endDate") LocalDate endDate) {
+        List<AFormat> formats = objManageAFormatUCIntPort.getAllByProffesorBetween(professorId, startDate, endDate);
+        List<AFormatDTOResponse> response = formats.stream()
+                .map(aFormatMapper::toResponse)
+                .toList();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
