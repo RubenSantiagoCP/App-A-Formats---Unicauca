@@ -12,6 +12,17 @@ public class Professor {
     private List<HistoricalRecord> historicalRecord;
     private List<AFormat> aFormats;
 
+    public Professor() {}
+    public Professor(Long id, String name, String lastName, String groupName, String email, List<HistoricalRecord> historicalRecord, List<AFormat> aFormats) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.groupName = groupName;
+        this.email = email;
+        this.historicalRecord = historicalRecord;
+        this.aFormats = aFormats;
+    }
+
     public Long getId() {
         return id;
     }

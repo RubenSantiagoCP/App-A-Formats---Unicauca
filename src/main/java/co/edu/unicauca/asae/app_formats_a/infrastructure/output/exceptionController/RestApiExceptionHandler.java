@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class RestApiExceptionHandler {
-    @ExceptionHandler(Exception.class)
+    /*@ExceptionHandler(Exception.class)
     public ResponseEntity<Error> handleGenericException(final HttpServletRequest request, final Exception ex,
             final Locale locale) {
         final Error error = ErrorUtils.buildError(
@@ -34,7 +34,7 @@ public class RestApiExceptionHandler {
                                 request.getMethod());
 
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    }*/
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,

@@ -20,11 +20,10 @@ public class BeanConfigurations {
     }
 
     @Bean
-    public ManageProfessorUCAdapter createManageProfessorUCAdapter(ManageProfessorGatewayIntPort objManageProfessorGatewayIntPort, ManageHistoricalRecordGatewayIntPort manageHistoricalRecordGateway,
+    public ManageProfessorUCAdapter createManageProfessorUCAdapter(ManageProfessorGatewayIntPort objManageProfessorGatewayIntPort,
                                                                    ResultsFormatterIntPort resultsFormatterIntPort) {
         ManageProfessorUCAdapter objManageProfessorUCAdapter = new ManageProfessorUCAdapter(
-                objManageProfessorGatewayIntPort,
-                manageHistoricalRecordGateway, resultsFormatterIntPort);
+                objManageProfessorGatewayIntPort, resultsFormatterIntPort);
         return objManageProfessorUCAdapter;
     }
 

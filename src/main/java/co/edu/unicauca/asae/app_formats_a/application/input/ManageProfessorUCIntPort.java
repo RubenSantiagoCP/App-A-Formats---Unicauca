@@ -17,5 +17,5 @@ public interface ManageProfessorUCIntPort {
 
     public List<Professor> getByGroupAndStartWithPattern(String groupName, String pattern);
 
-    public List<HistoricalRecord> getCommitteeMembers();
+    public List<Professor> getCommitteeMembers();
 }

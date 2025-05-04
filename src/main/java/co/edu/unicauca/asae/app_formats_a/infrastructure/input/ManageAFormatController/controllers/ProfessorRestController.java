@@ -18,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -39,9 +41,9 @@ public class ProfessorRestController {
 
 
     @GetMapping("/committee-members")
-    public ResponseEntity<List<HistoricalRecordDTOResponse>> getComiteeMembers(){
-        List<HistoricalRecord> professors = this.manageProfessorUCAdapter.getCommitteeMembers();
-        return ResponseEntity.ok(historicalRecordInputMapper.toResponseList(professors));
+    public ResponseEntity<List<ProfessorDTOResponse>> getComiteeMembers(){
+        List<Professor> professors = this.manageProfessorUCAdapter.getCommitteeMembers();
+        return ResponseEntity.ok(professorInputMapper.toResponseListWithHistoricalRecords(professors));
     }
 
     @GetMapping("/aformats/{id}")
@@ -50,5 +52,5 @@ public class ProfessorRestController {
         return  ResponseEntity.ok(this.aFormatInputMapper.lstAFormatsToResponse(aFormats));
     }
 
-    
+
 }
