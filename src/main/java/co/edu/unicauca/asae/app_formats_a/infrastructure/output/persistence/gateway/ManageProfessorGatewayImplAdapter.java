@@ -23,6 +23,7 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
 
     private final ProfessorRepositoryInt professorRepository;
     private final ProfessorOutputMapper professorOutputMapper;
+    private final AFormatOutputMapper aFormatOutputMapper;
 
     @Override
     @Transactional(readOnly = true)
@@ -71,20 +72,17 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     @Override
     public Optional<List<Professor>> getCommiteeMembers() {
         Optional<List<ProfessorEntity>> dbProffesors = professorRepository.findAllByHistoricalRecord_ObjRole_AssignedRole(RoleEnum.COMMITTEE_MEMBER);
-        return dbProffesors.flatMap(entities ->
-                Optional.of(professorOutputMapper.toDomainListWithRecords(entities))
-        );
+        return dbProffesors.flatMap(entities -> Optional.of(professorOutputMapper.toDomainListWithRecords(entities)));
     }
-
 
 
     @Override
     @Transactional(readOnly = true)
     public List<AFormat> getAllAFormatsById(Long id) {
         Optional<ProfessorEntity> professorEntity = this.professorRepository.findProfessorWithFormatsAndEvaluationsById(id);
-        if(professorEntity.isPresent()){
+        if (professorEntity.isPresent()) {
             List<AFormatEntity> aFormatEntities = professorEntity.get().getAFormats();
-            return  this.aFormatOutputMapper.toDomainList(aFormatEntities);
+            return this.aFormatOutputMapper.toDomainList(aFormatEntities);
         }
 
         return null;
