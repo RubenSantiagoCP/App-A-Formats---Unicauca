@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import co.edu.unicauca.asae.app_formats_a.infrastructure.output.exceptionController.customException.EntityAlreadyExistsException;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.output.exceptionController.customException.EntityNotFoundException;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.exceptionController.exceptionStructure.Error;
 
 import org.hibernate.exception.ConstraintViolationException;
@@ -33,6 +35,35 @@ public class RestApiExceptionHandler {
 
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+                                                        final EntityNotFoundException ex,
+                                                        final Locale locale){
+        final Error error = ErrorUtils.buildError(
+                ErrorCode.ENTITY_NOT_FOUND.getErrorCode(),
+                ex.formatException(),
+                HttpStatus.NOT_FOUND.value(),
+                req.getRequestURL().toString(),
+                req.getMethod());
+
+        return  new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(EntityAlreadyExistsException.class)
+    public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+                                                        final EntityAlreadyExistsException ex,
+                                                        final Locale locale){
+        final Error error = ErrorUtils.buildError(
+                ErrorCode.ENTITY_ALREADY_EXISTS.getErrorCode(),
+                ex.formatException(),
+                HttpStatus.NOT_ACCEPTABLE.value(),
+                req.getRequestURL().toString(),
+                req.getMethod());
+
+        return  new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {

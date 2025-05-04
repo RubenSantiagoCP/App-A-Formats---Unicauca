@@ -4,10 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import co.edu.unicauca.asae.app_formats_a.application.input.ManageObservationUCIntPort;
-import co.edu.unicauca.asae.app_formats_a.application.output.ManageEvaluationGatewayIntPort;
-import co.edu.unicauca.asae.app_formats_a.application.output.ManageAFormatGatewayIntPort;
-import co.edu.unicauca.asae.app_formats_a.application.output.ManageObservationGatewayIntPort;
-import co.edu.unicauca.asae.app_formats_a.application.output.ManageProfessorGatewayIntPort;
+import co.edu.unicauca.asae.app_formats_a.application.output.*;
 import co.edu.unicauca.asae.app_formats_a.commons.enums.ConceptEnum;
 import co.edu.unicauca.asae.app_formats_a.domain.models.Evaluation;
 import co.edu.unicauca.asae.app_formats_a.domain.models.Observation;
@@ -19,29 +16,29 @@ public class ManageObservationUCAdapter implements ManageObservationUCIntPort {
     private final ManageProfessorGatewayIntPort manageProfessorGateway;
     private final ManageEvaluationGatewayIntPort manageEvaluationGateway;
     private final ManageAFormatGatewayIntPort manageAFormatGateway;
-
+    private final ResultsFormatterIntPort resultsFormatter;
     
 
     public ManageObservationUCAdapter(ManageObservationGatewayIntPort manageObservationGateway,
             ManageProfessorGatewayIntPort manageProfessorGateway, ManageEvaluationGatewayIntPort manageEvaluationGateway,
-            ManageAFormatGatewayIntPort manageAFormatGateway) {
+            ManageAFormatGatewayIntPort manageAFormatGateway, ResultsFormatterIntPort resultsFormatter) {
         this.manageObservationGateway = manageObservationGateway;
         this.manageProfessorGateway = manageProfessorGateway;
         this.manageEvaluationGateway = manageEvaluationGateway;
         this.manageAFormatGateway = manageAFormatGateway;
+        this.resultsFormatter = resultsFormatter;
     }
 
     @Override
     public Observation save(Observation observation, Long formatId) {
         boolean existsFormat = manageAFormatGateway.existsById(formatId);
         if(!existsFormat){
-            throw new IllegalArgumentException("El formato no existe");
-        }
+            resultsFormatter.returnResponseErrorEntityNotFound("Format with ID "+formatId+" doesn't exist");        }
 
         for (Professor professor : observation.getProfessors()) {
             boolean professorById = manageProfessorGateway.existsById(professor.getId());
             if (!professorById) {
-                throw new IllegalArgumentException("El profesor no existe");
+                resultsFormatter.returnResponseErrorEntityNotFound("Professor with ID "+professor.getId()+" doesn't exist");
             }
         }
 

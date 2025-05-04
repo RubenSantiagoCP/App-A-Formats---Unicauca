@@ -13,17 +13,18 @@ public class BeanConfigurations {
 
     @Bean
     public ManageAFormatUCAdapter createManageAFormatUCAdapter(ManageAFormatGatewayIntPort objAFormatGatewayIntPort,
-            ManageProfessorGatewayIntPort objManageProfessorGatewayIntPort) {
+            ManageProfessorGatewayIntPort objManageProfessorGatewayIntPort, ResultsFormatterIntPort resultsFormatterIntPort) {
         ManageAFormatUCAdapter objManageAFormatUCAdapter = new ManageAFormatUCAdapter(objAFormatGatewayIntPort,
-                objManageProfessorGatewayIntPort);
+                objManageProfessorGatewayIntPort, resultsFormatterIntPort);
         return objManageAFormatUCAdapter;
     }
 
     @Bean
-    public ManageProfessorUCAdapter createManageProfessorUCAdapter(ManageProfessorGatewayIntPort objManageProfessorGatewayIntPort, ManageHistoricalRecordGatewayIntPort manageHistoricalRecordGateway) {
+    public ManageProfessorUCAdapter createManageProfessorUCAdapter(ManageProfessorGatewayIntPort objManageProfessorGatewayIntPort, ManageHistoricalRecordGatewayIntPort manageHistoricalRecordGateway,
+                                                                   ResultsFormatterIntPort resultsFormatterIntPort) {
         ManageProfessorUCAdapter objManageProfessorUCAdapter = new ManageProfessorUCAdapter(
                 objManageProfessorGatewayIntPort,
-                manageHistoricalRecordGateway);
+                manageHistoricalRecordGateway, resultsFormatterIntPort);
         return objManageProfessorUCAdapter;
     }
 
@@ -32,10 +33,11 @@ public class BeanConfigurations {
             ManageObservationGatewayIntPort objManageObservationGatewayIntPort,
             ManageProfessorGatewayIntPort objManageProfessorGatewayIntPort,
             ManageEvaluationGatewayIntPort objEvaluationGatewayIntPort,
-            ManageAFormatGatewayIntPort objManageAFormatGatewayIntPort) {
+            ManageAFormatGatewayIntPort objManageAFormatGatewayIntPort,
+            ResultsFormatterIntPort resultsFormatterIntPort) {
         ManageObservationUCAdapter objManageObservationUCAdapter = new ManageObservationUCAdapter(
                 objManageObservationGatewayIntPort, objManageProfessorGatewayIntPort, objEvaluationGatewayIntPort,
-                objManageAFormatGatewayIntPort);
+                objManageAFormatGatewayIntPort, resultsFormatterIntPort);
         return objManageObservationUCAdapter;
     }
 

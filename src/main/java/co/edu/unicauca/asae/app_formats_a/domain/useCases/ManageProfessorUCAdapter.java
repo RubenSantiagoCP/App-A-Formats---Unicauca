@@ -6,6 +6,7 @@ import java.util.List;
 import co.edu.unicauca.asae.app_formats_a.application.input.ManageProfessorUCIntPort;
 import co.edu.unicauca.asae.app_formats_a.application.output.ManageHistoricalRecordGatewayIntPort;
 import co.edu.unicauca.asae.app_formats_a.application.output.ManageProfessorGatewayIntPort;
+import co.edu.unicauca.asae.app_formats_a.application.output.ResultsFormatterIntPort;
 import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
 import co.edu.unicauca.asae.app_formats_a.domain.models.HistoricalRecord;
 import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
@@ -14,10 +15,13 @@ public class ManageProfessorUCAdapter implements ManageProfessorUCIntPort {
 
     private final ManageProfessorGatewayIntPort manageProfessorGateway;
     private final ManageHistoricalRecordGatewayIntPort manageHistoricalRecordGateway;
+    private final ResultsFormatterIntPort resultsFormatterIntPort;
 
-    public ManageProfessorUCAdapter(ManageProfessorGatewayIntPort manageProfessorGateway, ManageHistoricalRecordGatewayIntPort manageHistoricalRecordGateway) {
+    public ManageProfessorUCAdapter(ManageProfessorGatewayIntPort manageProfessorGateway, ManageHistoricalRecordGatewayIntPort manageHistoricalRecordGateway,
+                                    ResultsFormatterIntPort resultsFormatterIntPort) {
         this.manageProfessorGateway = manageProfessorGateway;
         this. manageHistoricalRecordGateway = manageHistoricalRecordGateway;
+        this.resultsFormatterIntPort = resultsFormatterIntPort;
     }
 
     @Override
@@ -31,7 +35,7 @@ public class ManageProfessorUCAdapter implements ManageProfessorUCIntPort {
 
         boolean professorExists = this.manageProfessorGateway.existsById(id);
         if(!professorExists){
-            throw new IllegalArgumentException("Id de profesor no encontrado");
+            resultsFormatterIntPort.returnResponseErrorEntityNotFound("Professor with ID "+id+" doesn't exist");
         }
 
         return this.manageProfessorGateway.getAllAFormatsById(id);

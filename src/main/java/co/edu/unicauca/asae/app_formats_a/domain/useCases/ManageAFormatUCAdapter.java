@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import co.edu.unicauca.asae.app_formats_a.application.input.ManageAFormatUCIntPort;
 import co.edu.unicauca.asae.app_formats_a.application.output.ManageAFormatGatewayIntPort;
 import co.edu.unicauca.asae.app_formats_a.application.output.ManageProfessorGatewayIntPort;
+import co.edu.unicauca.asae.app_formats_a.application.output.ResultsFormatterIntPort;
 import co.edu.unicauca.asae.app_formats_a.commons.enums.ConceptEnum;
 import co.edu.unicauca.asae.app_formats_a.commons.enums.StateEnum;
 import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
@@ -17,10 +18,13 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
 
     private final ManageAFormatGatewayIntPort manageAFormatGateway;
     private final ManageProfessorGatewayIntPort manageProfessorGateway;
+    private final ResultsFormatterIntPort resultsFormatter;
 
-    public ManageAFormatUCAdapter(ManageAFormatGatewayIntPort manageAFormatGateway, ManageProfessorGatewayIntPort manageProfessorGateway) {
+    public ManageAFormatUCAdapter(ManageAFormatGatewayIntPort manageAFormatGateway, ManageProfessorGatewayIntPort manageProfessorGateway,
+                                  ResultsFormatterIntPort resultsFormatter) {
         this.manageAFormatGateway = manageAFormatGateway;
         this.manageProfessorGateway = manageProfessorGateway;
+        this.resultsFormatter = resultsFormatter;
     }
 
     @Override
@@ -35,25 +39,28 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
 
     @Override
     public AFormat getById(Long id) {
-        AFormat aFormat = this.manageAFormatGateway.findById(id);
-        return aFormat;
+        boolean existsAFormat = this.manageAFormatGateway.existsById(id);
+        if(!existsAFormat){
+            resultsFormatter.returnResponseErrorEntityNotFound("Format with ID "+id+" doesn't exist");
+        }
+        return this.manageAFormatGateway.findById(id);
     }
 
     private void validateProfessor(Professor professor) {
         if (professor == null) {
-            throw new IllegalArgumentException("El profesor no puede ser nulo");
+            resultsFormatter.returnResponseErrorBusinessRuleViolation("Professor can't be null");
         }
 
         boolean emailExists = this.manageProfessorGateway.existsProfessorByEmail(professor.getEmail());
 
         if (professor.getId() == null && emailExists) {
-            throw new IllegalArgumentException("El email ya se encuentra registrado");
+            resultsFormatter.returnResponseErrorEntityAlreadyExists("Email '" +professor.getEmail()+"' already registered");
         }
 
         if (professor.getId() != null) {
             boolean idExists = this.manageProfessorGateway.existsById(professor.getId());
             if (!idExists) {
-                throw new IllegalArgumentException("Id de profesor no existe");
+                resultsFormatter.returnResponseErrorEntityNotFound("Professor with ID "+professor.getId()+" doesn't exist");
             }
         }
     }
