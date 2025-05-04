@@ -5,6 +5,7 @@ import co.edu.unicauca.asae.app_formats_a.domain.models.HistoricalRecord;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.AFormatDTOResponse;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.HistoricalRecordDTOResponse;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.mappers.AFormatInputMapper;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.mappers.CycleAvoidingMappingContext;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.mappers.HistoricalRecordInputMapper;
 import jakarta.validation.constraints.Min;
 import org.springframework.data.repository.query.Param;
@@ -46,7 +47,7 @@ public class ProfessorRestController {
     @GetMapping("/committee-members")
     public ResponseEntity<List<ProfessorDTOResponse>> getComiteeMembers(){
         List<Professor> professors = this.manageProfessorUCAdapter.getCommitteeMembers();
-        return ResponseEntity.ok(professorInputMapper.toResponseListWithHistoricalRecords(professors));
+        return ResponseEntity.ok(professorInputMapper.toResponseListWithHistoricalRecords(professors, new CycleAvoidingMappingContext()));
     }
 
     @GetMapping("/aformats/{id}")

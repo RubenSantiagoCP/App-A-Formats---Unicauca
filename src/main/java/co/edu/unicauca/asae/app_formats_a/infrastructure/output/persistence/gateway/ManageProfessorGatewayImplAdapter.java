@@ -7,6 +7,7 @@ import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.AFormatEntity;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.ProfessorEntity;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.mappers.AFormatOutputMapper;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.mappers.CycleAvoidingMappingContext;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.mappers.ProfessorOutputMapper;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.repositories.ProfessorRepositoryInt;
 import lombok.RequiredArgsConstructor;
@@ -72,7 +73,7 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     @Override
     public Optional<List<Professor>> getCommiteeMembers() {
         Optional<List<ProfessorEntity>> dbProffesors = professorRepository.findAllByHistoricalRecord_ObjRole_AssignedRole(RoleEnum.COMMITTEE_MEMBER);
-        return dbProffesors.flatMap(entities -> Optional.of(professorOutputMapper.toDomainListWithRecords(entities)));
+        return dbProffesors.flatMap(entities -> Optional.of(professorOutputMapper.toDomainListWithRecords(entities, new CycleAvoidingMappingContext())));
     }
 
 

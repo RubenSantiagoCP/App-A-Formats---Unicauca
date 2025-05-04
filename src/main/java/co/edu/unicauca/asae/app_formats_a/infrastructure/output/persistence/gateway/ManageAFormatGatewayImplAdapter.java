@@ -1,6 +1,7 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.gateway;
 
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.mappers.AFormatOutputMapper;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.mappers.AFormatOutputMapperWithoutDependencies;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,7 @@ public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntP
     private final AFormatRepositoryInt aFormatRepository;
     private final AFormatOutputMapper aFormatMapper;
     private final ProfessorRepositoryInt professorRepository;
+    private final AFormatOutputMapperWithoutDependencies aFormatOutputMapperWithoutDependencies;
     
     @Override
     @Transactional
@@ -66,7 +68,7 @@ public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntP
     public Optional<List<AFormat>> findAllByProffesorBetween(Long id, LocalDate startDate, LocalDate endDate) {
         Optional<List<AFormatEntity>> dbFormats = aFormatRepository.findByTitleDatesAndProfessor(null, startDate, endDate, id);
         return dbFormats.flatMap(entities ->
-                Optional.of(aFormatMapper.toDomainListIgnoringDependencies(entities)));
+                Optional.of(aFormatOutputMapperWithoutDependencies.toDomainList(entities)));
 
     }
 

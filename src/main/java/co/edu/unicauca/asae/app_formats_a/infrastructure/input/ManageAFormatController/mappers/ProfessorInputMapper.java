@@ -5,10 +5,7 @@ import java.util.List;
 
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.HistoricalRecordDTOResponse;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.RoleDTOResponse;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
 import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.request.ProfessorDTORequest;
@@ -28,7 +25,14 @@ public interface ProfessorInputMapper {
     List<ProfessorDTOResponse> toResponseList(List<Professor> professors);
 
 
-    default List<ProfessorDTOResponse> toResponseListWithHistoricalRecords(List<Professor> professors) {
+    @Named("toResponseWithHistoricalRecords")
+    @Mapping(target = "records",source="historicalRecord")
+    ProfessorDTOResponse toResponseWithHistoricalRecords(Professor professor, @Context CycleAvoidingMappingContext context);
+
+    @IterableMapping(qualifiedByName = "toResponseWithHistoricalRecords")
+    List<ProfessorDTOResponse> toResponseListWithHistoricalRecords(List<Professor> professors, @Context CycleAvoidingMappingContext context) ;
+
+    /*default List<ProfessorDTOResponse> toResponseListWithHistoricalRecords(List<Professor> professors) {
         List<ProfessorDTOResponse> responses = new ArrayList<>();
 
         for (Professor professor : professors) {
@@ -59,5 +63,5 @@ public interface ProfessorInputMapper {
 
         return responses;
     }
-
+*/
 }

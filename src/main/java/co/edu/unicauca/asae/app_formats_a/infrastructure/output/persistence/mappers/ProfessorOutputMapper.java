@@ -11,10 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.RoleEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-import org.mapstruct.ReportingPolicy;
+import jdk.jfr.Name;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProfessorOutputMapper {
@@ -38,7 +36,24 @@ public interface ProfessorOutputMapper {
                 .toList();
     }
 
+    @Named("roleToDomain")
+    @Mapping(target = "historicalRecords", ignore = true)
+    Role toDomain(RoleEntity roleEntity, @Context CycleAvoidingMappingContext context);
 
+    @Named("historicalRecordToDomain")
+    @Mapping(target = "professor", ignore = true)
+    @Mapping(target = "role", source = "objRole", qualifiedByName = "roleToDomain")
+    HistoricalRecord toDomain(HistoricalRecordEntity historicalRecordEntity,@Context CycleAvoidingMappingContext context);
+
+    @Named("toDomainWithRecords")
+    @Mapping(target= "aFormats", ignore = true)
+    @Mapping(target = "historicalRecord", qualifiedByName = "historicalRecordToDomain")
+    Professor toDomainWithRecords(ProfessorEntity entity, @Context CycleAvoidingMappingContext context);
+
+    @IterableMapping(qualifiedByName = "toDomainWithRecords")
+    List<Professor> toDomainListWithRecords(List<ProfessorEntity> entities, @Context CycleAvoidingMappingContext context);
+
+/*
     default List<Professor> toDomainListWithRecords(List<ProfessorEntity> entities) {
         List<Professor> professors = new ArrayList<>();
 
@@ -81,7 +96,7 @@ public interface ProfessorOutputMapper {
             );
         }
         return professors;
-    }
+    }*/
 
 
 }
