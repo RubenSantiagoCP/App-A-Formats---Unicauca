@@ -5,22 +5,19 @@ import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.enti
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class HistoricalRecordDTOResponse {
     private LocalDate startDate;
 
     private LocalDate endDate;
 
-    private ProfessorDTOResponse professor;
 
     private RoleDTOResponse role;
 

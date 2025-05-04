@@ -20,6 +20,7 @@ public interface ManageProfessorGatewayIntPort {
 
     public boolean existsById(Long id);
 
+    Optional<List<Professor>> getCommiteeMembers();
     public List<AFormat> getAllAFormatsById(Long id);
 
 }

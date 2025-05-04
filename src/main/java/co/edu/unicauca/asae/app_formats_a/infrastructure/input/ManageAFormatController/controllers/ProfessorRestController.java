@@ -1,10 +1,7 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.controllers;
 
-import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
 import co.edu.unicauca.asae.app_formats_a.domain.models.HistoricalRecord;
-import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.AFormatDTOResponse;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.HistoricalRecordDTOResponse;
-import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.mappers.AFormatInputMapper;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.mappers.HistoricalRecordInputMapper;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -39,9 +38,9 @@ public class ProfessorRestController {
 
 
     @GetMapping("/committee-members")
-    public ResponseEntity<List<HistoricalRecordDTOResponse>> getComiteeMembers(){
-        List<HistoricalRecord> professors = this.manageProfessorUCAdapter.getCommitteeMembers();
-        return ResponseEntity.ok(historicalRecordInputMapper.toResponseList(professors));
+    public ResponseEntity<List<ProfessorDTOResponse>> getComiteeMembers(){
+        List<Professor> professors = this.manageProfessorUCAdapter.getCommitteeMembers();
+        return ResponseEntity.ok(professorInputMapper.toResponseListWithHistoricalRecords(professors));
     }
 
     @GetMapping("/aformats/{id}")
@@ -50,5 +49,5 @@ public class ProfessorRestController {
         return  ResponseEntity.ok(this.aFormatInputMapper.lstAFormatsToResponse(aFormats));
     }
 
-    
+
 }

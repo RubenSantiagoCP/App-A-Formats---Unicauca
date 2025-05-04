@@ -10,7 +10,7 @@ import jakarta.validation.Payload;
 @Constraint(validatedBy = ObjectiveStartsWithInfinitiveValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.TYPE_USE})
 public @interface ObjectiveStartsWithInfinitiveInt {
-    String message() default "objective.startsWith.infinitive";
+    String message() default "{objective.startsWith.infinitive}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -1,6 +1,7 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.gateway;
 
 import co.edu.unicauca.asae.app_formats_a.application.output.ManageProfessorGatewayIntPort;
+import co.edu.unicauca.asae.app_formats_a.commons.enums.RoleEnum;
 import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
 import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.AFormatEntity;
@@ -22,7 +23,6 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
 
     private final ProfessorRepositoryInt professorRepository;
     private final ProfessorOutputMapper professorOutputMapper;
-    private final AFormatOutputMapper aFormatOutputMapper;
 
     @Override
     @Transactional(readOnly = true)
@@ -67,6 +67,16 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     public boolean existsById(Long id) {
         return professorRepository.existsById(id);
     }
+
+    @Override
+    public Optional<List<Professor>> getCommiteeMembers() {
+        Optional<List<ProfessorEntity>> dbProffesors = professorRepository.findAllByHistoricalRecord_ObjRole_AssignedRole(RoleEnum.COMMITTEE_MEMBER);
+        return dbProffesors.flatMap(entities ->
+                Optional.of(professorOutputMapper.toDomainListWithRecords(entities))
+        );
+    }
+
+
 
     @Override
     @Transactional(readOnly = true)
