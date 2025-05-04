@@ -1,10 +1,13 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.controllers;
 
+import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
 import co.edu.unicauca.asae.app_formats_a.domain.models.HistoricalRecord;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.AFormatDTOResponse;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.HistoricalRecordDTOResponse;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.mappers.AFormatInputMapper;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.mappers.HistoricalRecordInputMapper;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.*;
 
 import co.edu.unicauca.asae.app_formats_a.application.input.ManageProfessorUCIntPort;
 import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
@@ -15,8 +18,6 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -27,6 +28,7 @@ public class ProfessorRestController {
     private final ManageProfessorUCIntPort manageProfessorUCAdapter;
     private final ProfessorInputMapper professorInputMapper;
     private final HistoricalRecordInputMapper historicalRecordInputMapper;
+    private final AFormatInputMapper aFormatInputMapper;
 
 
     @GetMapping("/get")
@@ -40,6 +42,12 @@ public class ProfessorRestController {
     public ResponseEntity<List<HistoricalRecordDTOResponse>> getComiteeMembers(){
         List<HistoricalRecord> professors = this.manageProfessorUCAdapter.getCommitteeMembers();
         return ResponseEntity.ok(historicalRecordInputMapper.toResponseList(professors));
+    }
+
+    @GetMapping("/aformats/{id}")
+    public ResponseEntity<List<AFormatDTOResponse>> getAFormatsByIdProfessor(@PathVariable Long id){
+        List<AFormat> aFormats = this.manageProfessorUCAdapter.getAllAFormatsByProfessor(id);
+        return  ResponseEntity.ok(this.aFormatInputMapper.lstAFormatsToResponse(aFormats));
     }
 
     

@@ -1,8 +1,11 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.gateway;
 
 import co.edu.unicauca.asae.app_formats_a.application.output.ManageProfessorGatewayIntPort;
+import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
 import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.AFormatEntity;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.ProfessorEntity;
+import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.mappers.AFormatOutputMapper;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.mappers.ProfessorOutputMapper;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.repositories.ProfessorRepositoryInt;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +22,7 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
 
     private final ProfessorRepositoryInt professorRepository;
     private final ProfessorOutputMapper professorOutputMapper;
+    private final AFormatOutputMapper aFormatOutputMapper;
 
     @Override
     @Transactional(readOnly = true)
@@ -63,6 +67,19 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     public boolean existsById(Long id) {
         return professorRepository.existsById(id);
     }
-   
-   
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<AFormat> getAllAFormatsById(Long id) {
+        Optional<ProfessorEntity> professorEntity = this.professorRepository.findProfessorWithFormatsAndEvaluationsById(id);
+        if(professorEntity.isPresent()){
+            List<AFormatEntity> aFormatEntities = professorEntity.get().getAFormats();
+            return  this.aFormatOutputMapper.toDomainList(aFormatEntities);
+        }
+
+        return null;
+
+    }
+
+
 }

@@ -101,7 +101,7 @@ public class AFormat {
 
     public void initialize() {
         this.setState(new State(null, StateEnum.FORMULATED, LocalDate.now(), this));
-        Evaluation ev = new Evaluation(null, ConceptEnum.UNESTABLISHED, LocalDate.now(), "n/a", null, null);
+        Evaluation ev = new Evaluation(null, ConceptEnum.UNESTABLISHED, LocalDate.now(), "Vanesa Agredo", null, null);
         this.setEvaluations(new ArrayList<>(List.of(ev)));
     }
 

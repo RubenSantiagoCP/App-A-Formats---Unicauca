@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.app_formats_a.application.output;
 
+import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
 import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
 
 import java.util.List;
@@ -18,5 +19,7 @@ public interface ManageProfessorGatewayIntPort {
     public List<Professor> getAllProfessorsById(List<Long> ids);
 
     public boolean existsById(Long id);
+
+    public List<AFormat> getAllAFormatsById(Long id);
 
 }

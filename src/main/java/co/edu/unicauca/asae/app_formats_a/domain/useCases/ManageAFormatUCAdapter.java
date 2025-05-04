@@ -52,8 +52,8 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
 
         if (professor.getId() != null) {
             boolean idExists = this.manageProfessorGateway.existsById(professor.getId());
-            if (!idExists && emailExists) {
-                throw new IllegalArgumentException("El email ya se encuentra registrado");
+            if (!idExists) {
+                throw new IllegalArgumentException("Id de profesor no existe");
             }
         }
     }

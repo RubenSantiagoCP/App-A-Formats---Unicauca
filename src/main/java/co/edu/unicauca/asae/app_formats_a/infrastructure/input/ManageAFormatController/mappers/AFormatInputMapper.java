@@ -16,6 +16,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.SubclassMapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AFormatInputMapper {
     @SubclassMapping(source = PPAFormatDTORequest.class, target = PPAFormat.class)
@@ -25,6 +27,13 @@ public interface AFormatInputMapper {
     @SubclassMapping(source = PPAFormat.class, target = PPAFormatDTOResponse.class)
     @SubclassMapping(source = TIAFormat.class, target = TIAFormatDTOResponse.class)
     AFormatDTOResponse toResponse(AFormat aFormat);
+
+    default List<AFormatDTOResponse> lstAFormatsToResponse(List<AFormat> aFormats){
+        if(aFormats==null) return  null;
+        return aFormats.stream()
+                .map(this::toResponse)
+                .toList();
+    }
 
 
 }

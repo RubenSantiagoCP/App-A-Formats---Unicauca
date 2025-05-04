@@ -29,9 +29,13 @@ import java.util.List;
 public class AFormatDTOResponse {
     private Long id;
 
+    private String title;
+
     private String generalObjective;
 
-    private String title;
+    private String student1Name;
+
+    private String student1code;
 
     private List<String> specificObjective;
 
@@ -40,8 +44,4 @@ public class AFormatDTOResponse {
     private StateDTOResponse state;
 
     private List<EvaluationDTOResponse> evaluations;
-
-    private String student1Name;
-
-    private String student1code;
 }

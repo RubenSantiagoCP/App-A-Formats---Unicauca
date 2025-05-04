@@ -28,8 +28,13 @@ public class ManageProfessorUCAdapter implements ManageProfessorUCIntPort {
 
     @Override
     public List<AFormat> getAllAFormatsByProfessor(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllAFormatsByProfessor'");
+
+        boolean professorExists = this.manageProfessorGateway.existsById(id);
+        if(!professorExists){
+            throw new IllegalArgumentException("Id de profesor no encontrado");
+        }
+
+        return this.manageProfessorGateway.getAllAFormatsById(id);
     }
 
     @Override
