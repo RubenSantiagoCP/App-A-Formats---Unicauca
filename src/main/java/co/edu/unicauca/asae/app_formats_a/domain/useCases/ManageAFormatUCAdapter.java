@@ -3,6 +3,7 @@ package co.edu.unicauca.asae.app_formats_a.domain.useCases;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import co.edu.unicauca.asae.app_formats_a.application.input.ManageAFormatUCIntPort;
 import co.edu.unicauca.asae.app_formats_a.application.output.ManageAFormatGatewayIntPort;
@@ -49,7 +50,13 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
 
     @Override
     public List<AFormat> getAllByProffesorBetween(Long id,LocalDate startDate, LocalDate endDate) {
-        return this.manageAFormatGateway.findAllByProffesorBetween( id,  startDate,  endDate).orElseThrow();
+
+        if(this.manageProfessorGateway.existById(id)){
+            Optional<List<AFormat>> formats = this.manageAFormatGateway.findAllByProffesorBetween( id,  startDate,  endDate);
+            return formats.orElse(null);
+        }
+        resultsFormatter.returnResponseErrorBusinessRuleViolation("Professor with id "+id+" doesn't exist");
+        return null;
     }
 
     private void validateProfessor(Professor professor) {

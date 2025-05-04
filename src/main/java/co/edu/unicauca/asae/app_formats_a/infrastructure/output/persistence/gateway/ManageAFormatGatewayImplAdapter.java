@@ -32,11 +32,16 @@ public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntP
         AFormatEntity aFormatEntity = aFormatMapper.toEntity(aFormat);
         aFormatEntity.getState().setObjAformat(aFormatEntity);
         aFormatEntity.getEvaluations().get(0).setObjAFormat(aFormatEntity);
+        // Si nos mandan id
         if(aFormat.getObjProfessor().getId()!=null){
+            //Buscamos el profesor
             ProfessorEntity professorEntity = professorRepository.getReferenceById(aFormat.getObjProfessor().getId());
+            // Si existe lo asignamos
             if(professorEntity != null){
                 aFormatEntity.setObjProfessor(professorEntity);
             }
+            // Si no esiste, se crea solito
+
         }
 
         aFormatEntity = aFormatRepository.save(aFormatEntity);
@@ -65,6 +70,7 @@ public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntP
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<List<AFormat>> findAllByProffesorBetween(Long id, LocalDate startDate, LocalDate endDate) {
         Optional<List<AFormatEntity>> dbFormats = aFormatRepository.findByTitleDatesAndProfessor(null, startDate, endDate, id);
         return dbFormats.flatMap(entities ->

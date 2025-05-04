@@ -32,6 +32,12 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
         return professorRepository.existsByEmail(email);
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public boolean existById(Long id){
+        return professorRepository.existsById(id);
+    }
+
     @Override
     @Transactional
     public Professor save(Professor professor) {
@@ -71,6 +77,7 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<List<Professor>> getCommiteeMembers() {
         Optional<List<ProfessorEntity>> dbProffesors = professorRepository.findAllByHistoricalRecord_ObjRole_AssignedRole(RoleEnum.COMMITTEE_MEMBER);
         return dbProffesors.flatMap(entities -> Optional.of(professorOutputMapper.toDomainListWithRecords(entities, new CycleAvoidingMappingContext())));

@@ -26,4 +26,5 @@ public interface ProfessorRepositoryInt extends JpaRepository<ProfessorEntity, L
             "WHERE p.id = :professorId")
     Optional<ProfessorEntity> findProfessorWithFormatsAndEvaluationsById(@Param("professorId") Long professorId);
 
+
 }

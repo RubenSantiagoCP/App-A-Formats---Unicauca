@@ -27,4 +27,5 @@ public interface AFormatRepositoryInt extends JpaRepository<AFormatEntity, Long>
             @Param("stateRegisterStateDateBefore") LocalDate stateRegisterStateDateBefore,
             @Param("objProfessorId") Long objProfessorId
     );
+
 }
