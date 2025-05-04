@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import co.edu.unicauca.asae.app_formats_a.infrastructure.output.exceptionController.customException.BusinessRuleException;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.exceptionController.customException.EntityAlreadyExistsException;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.exceptionController.customException.EntityNotFoundException;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.exceptionController.exceptionStructure.Error;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class RestApiExceptionHandler {
-    /*@ExceptionHandler(Exception.class)
+    @ExceptionHandler(Exception.class)
     public ResponseEntity<Error> handleGenericException(final HttpServletRequest request, final Exception ex,
             final Locale locale) {
         final Error error = ErrorUtils.buildError(
@@ -34,7 +35,7 @@ public class RestApiExceptionHandler {
                                 request.getMethod());
 
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-    }*/
+    }
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
@@ -48,6 +49,20 @@ public class RestApiExceptionHandler {
                 req.getMethod());
 
         return  new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BusinessRuleException.class)
+    public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+                                                        final BusinessRuleException ex,
+                                                        final Locale locale){
+        final Error error = ErrorUtils.buildError(
+                ErrorCode.BUSINESS_RULE_VIOLATION.getErrorCode(),
+                ex.formatException(),
+                HttpStatus.BAD_REQUEST.value(),
+                req.getRequestURL().toString(),
+                req.getMethod());
+
+        return  new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(EntityAlreadyExistsException.class)

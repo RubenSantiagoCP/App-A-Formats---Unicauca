@@ -30,7 +30,7 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
     @Override
     public AFormat save(AFormat aFormat) {
         if (this.manageAFormatGateway.existsAFormatByTitle(aFormat.getTitle())) {
-            throw new IllegalArgumentException("El formato ya existe");
+            resultsFormatter.returnResponseErrorBusinessRuleViolation("Format with title '" +aFormat.getTitle()+"' already exists");
         }
         validateProfessor(aFormat.getObjProfessor());
         aFormat.initialize();
