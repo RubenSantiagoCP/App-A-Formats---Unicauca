@@ -1,18 +1,17 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.mappers;
 
-import co.edu.unicauca.asae.app_formats_a.domain.models.PPAFormat;
-import co.edu.unicauca.asae.app_formats_a.domain.models.TIAFormat;
+import co.edu.unicauca.asae.app_formats_a.domain.models.*;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.PPAFormatEntity;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.TIAFormatEntity;
 
 import org.mapstruct.*;
 
-import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.AFormatEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = { StateOutputMapper.class, ProfessorWithoutObjectsMapper.class, EvaluationsWithoutRelations.class})
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {StateOutputMapper.class, ProfessorWithoutObjectsMapper.class, EvaluationsWithoutRelations.class})
 public interface AFormatOutputMapper {
 
 
@@ -34,13 +33,14 @@ public interface AFormatOutputMapper {
     AFormatEntity toEntity(AFormat aFormat);
 
     @Named("mapAFormatsListToDomain")
-    default List<AFormat> toDomainList(List<AFormatEntity> aFormatEntities){
-        if(aFormatEntities== null) return  null;
+    default List<AFormat> toDomainList(List<AFormatEntity> aFormatEntities) {
+        if (aFormatEntities == null) return null;
         return aFormatEntities.stream()
                 .map(this::toDomainCreate)
                 .toList();
     }
 
+    /*
     @Named("toDomainIgnoringDependencies")
     @Mapping(target = "objProfessor", ignore = true)
     @Mapping(target = "evaluations", ignore = true)
@@ -50,6 +50,41 @@ public interface AFormatOutputMapper {
     @IterableMapping(qualifiedByName = "toDomainIgnoringDependencies")
     List<AFormat> toDomainListIgnoringDependencies(List<AFormatEntity> aFormatEntities);
 
+*/
+    default List<AFormat> toDomainListIgnoringDependencies(List<AFormatEntity> aFormatEntities) {
+        List<AFormat> result = new ArrayList<>();
+        for (AFormatEntity aFormatEntity : aFormatEntities) {
 
+            AFormat toAdd = new AFormat(
+                    aFormatEntity.getId(),
+                    aFormatEntity.getGeneralObjective(),
+                    aFormatEntity.getTitle(),
+                    aFormatEntity.getSpecificObjective(),
+                    new Professor(
+                            aFormatEntity.getObjProfessor().getId(),
+                            aFormatEntity.getObjProfessor().getName(),
+                            aFormatEntity.getObjProfessor().getLastName(),
+                            aFormatEntity.getObjProfessor().getGroupName(),
+                            aFormatEntity.getObjProfessor().getEmail(),
+                            null,
+                            null
+                    ),
+                    new State(
+                            aFormatEntity.getState().getId(),
+                            aFormatEntity.getState().getActualState(),
+                            aFormatEntity.getState().getRegisterStateDate(),
+                            null
+                    ),
+                    null,
+                    aFormatEntity.getStudent1Name(),
+                    Long.parseLong(aFormatEntity.getStudent1code())
+            );
+            result.add(
+                    toAdd
+            );
+        }
+
+        return result;
+    }
 
 }

@@ -19,6 +19,7 @@ public class AFormat {
     private String student1Name;
     private Long student1code;
 
+    public AFormat() {}
     public AFormat(Long id, String generalObjective, String title, List<String> specificObjective, Professor objProfessor, State state, List<Evaluation> evaluations, String student1Name, Long student1code) {
         this.id = id;
         this.generalObjective = generalObjective;
