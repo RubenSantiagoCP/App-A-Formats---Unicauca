@@ -6,7 +6,9 @@ import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatCont
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.HistoricalRecordDTOResponse;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.mappers.AFormatInputMapper;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.mappers.HistoricalRecordInputMapper;
+import jakarta.validation.constraints.Min;
 import org.springframework.data.repository.query.Param;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import co.edu.unicauca.asae.app_formats_a.application.input.ManageProfessorUCIntPort;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @RequestMapping("/api/professor")
 @RequiredArgsConstructor
+@Validated
 public class ProfessorRestController {
     
     private final ManageProfessorUCIntPort manageProfessorUCAdapter;
@@ -47,7 +50,7 @@ public class ProfessorRestController {
     }
 
     @GetMapping("/aformats/{id}")
-    public ResponseEntity<List<AFormatDTOResponse>> getAFormatsByIdProfessor(@PathVariable Long id){
+    public ResponseEntity<List<AFormatDTOResponse>> getAFormatsByIdProfessor(@PathVariable @Min(value= 1, message = "{professor.getAFormats.IdValidation}") Long id){
         List<AFormat> aFormats = this.manageProfessorUCAdapter.getAllAFormatsByProfessor(id);
         return  ResponseEntity.ok(this.aFormatInputMapper.lstAFormatsToResponse(aFormats));
     }
