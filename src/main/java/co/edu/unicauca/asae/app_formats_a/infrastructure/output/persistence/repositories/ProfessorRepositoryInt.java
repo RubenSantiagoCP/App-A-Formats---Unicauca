@@ -5,6 +5,7 @@ import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.enti
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.ProfessorEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
