@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.gateway;
 
+import co.edu.unicauca.asae.app_formats_a.commons.utils.PrintUtils;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.mappers.AFormatOutputMapper;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.mappers.AFormatOutputMapperWithoutDependencies;
 import org.springframework.stereotype.Service;
@@ -59,9 +60,9 @@ public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntP
     @Override
     @Transactional(readOnly = true)
     public AFormat findById(Long id) {
-        System.err.println("Before Fetching AFormat by ID from the database...");
+        PrintUtils.writeSubHeader("Before Fetching AFormat by ID from the database...");
         AFormatEntity aFormat = aFormatRepository.findById(id).orElse(null);
-        System.err.println("After Fetching AFormat by ID from the database...");
+        PrintUtils.writeSubHeader("After Fetching AFormat by ID from the database...");
         AFormat aFormatResult = aFormatMapper.toDomainCreate(aFormat);
         return aFormatResult;
     }

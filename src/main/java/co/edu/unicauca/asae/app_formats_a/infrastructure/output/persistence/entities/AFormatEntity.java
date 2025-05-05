@@ -36,7 +36,7 @@ public class AFormatEntity {
     @OneToOne(mappedBy = "objAformat", cascade = { CascadeType.ALL})
     private StateEntity state;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objAFormat", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "objAFormat", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
     private List<EvaluationEntity> evaluations;
 
     @Column(name = "student1_name", nullable = false)

@@ -2,6 +2,7 @@ package co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.gat
 
 import co.edu.unicauca.asae.app_formats_a.application.output.ManageProfessorGatewayIntPort;
 import co.edu.unicauca.asae.app_formats_a.commons.enums.RoleEnum;
+import co.edu.unicauca.asae.app_formats_a.commons.utils.PrintUtils;
 import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
 import co.edu.unicauca.asae.app_formats_a.domain.models.Professor;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.output.persistence.entities.AFormatEntity;
@@ -79,9 +80,9 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     @Override
     @Transactional(readOnly = true)
     public Optional<List<Professor>> getCommiteeMembers() {
-        System.err.println("Before Fetching Committee Members from the database...");
+        PrintUtils.writeSubHeader("Before Fetching Committee Members from the database...");
         Optional<List<ProfessorEntity>> dbProffesors = professorRepository.findAllByHistoricalRecord_ObjRole_AssignedRole(RoleEnum.COMMITTEE_MEMBER);
-        System.err.println("After Fetching Committee Members from the database...");
+        PrintUtils.writeSubHeader("After Fetching Committee Members from the database...");
         return dbProffesors.flatMap(entities -> Optional.of(professorOutputMapper.toDomainListWithRecords(entities, new CycleAvoidingMappingContext())));
     }
 
@@ -89,8 +90,11 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     @Override
     @Transactional(readOnly = true)
     public List<AFormat> getAllAFormatsById(Long id) {
-        System.err.println("Before Fetching AFormats By Professor Id from the database...");
-        Optional<ProfessorEntity> professorEntity = this.professorRepository.findProfessorWithFormatsAndEvaluationsById(id);
+        PrintUtils.writeSubHeader("Before Fetching AFormats By Professor Id from the database...");
+        //System.err.flush();
+        Optional<ProfessorEntity> professorEntity = this.professorRepository.findById(id);
+        PrintUtils.writeSubHeader("After Fetching AFormats By Professor Id from the database...");
+        //System.err.flush();
         if (professorEntity.isPresent()) {
             List<AFormatEntity> aFormatEntities = professorEntity.get().getAFormats();
             return this.aFormatOutputMapper.toDomainList(aFormatEntities);

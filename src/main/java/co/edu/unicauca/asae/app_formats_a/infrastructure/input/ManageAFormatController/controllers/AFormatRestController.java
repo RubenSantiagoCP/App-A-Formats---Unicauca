@@ -2,6 +2,7 @@ package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatCon
 
 
 import co.edu.unicauca.asae.app_formats_a.application.input.ManageAFormatUCIntPort;
+import co.edu.unicauca.asae.app_formats_a.commons.utils.PrintUtils;
 import co.edu.unicauca.asae.app_formats_a.domain.models.AFormat;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.request.AFormatDTORequest;
 import co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.DTO.response.AFormatDTOResponse;

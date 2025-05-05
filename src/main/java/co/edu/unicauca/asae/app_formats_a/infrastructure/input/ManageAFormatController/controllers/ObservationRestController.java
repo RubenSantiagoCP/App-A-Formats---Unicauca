@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.app_formats_a.infrastructure.input.ManageAFormatController.controllers;
 
+import co.edu.unicauca.asae.app_formats_a.commons.utils.PrintUtils;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
