@@ -27,6 +27,7 @@ public class AFormatRestController {
 
     @PostMapping
     public ResponseEntity<AFormatDTOResponse> saveAFormat(@Valid @RequestBody AFormatDTORequest aFormat) {
+        PrintUtils.writeHeader("Save A Format Method");
         AFormat formatToSave = aFormatMapper.toDomain(aFormat);
         AFormat savedAFormat = objManageAFormatUCIntPort.save(formatToSave);
         AFormatDTOResponse response = aFormatMapper.toResponse(savedAFormat);
@@ -35,6 +36,7 @@ public class AFormatRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<AFormatDTOResponse> getAFormatById(@PathVariable Long id) {
+        PrintUtils.writeHeader("Get A Format by Id Method");
         AFormat aFormat = objManageAFormatUCIntPort.getById(id);
         AFormatDTOResponse response = aFormatMapper.toResponse(aFormat);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -48,6 +50,7 @@ public class AFormatRestController {
             @RequestParam("professorId") Long professorId,
             @RequestParam("startDate") LocalDate startDate,
             @RequestParam("endDate") LocalDate endDate) {
+        PrintUtils.writeHeader("get Formats By Professor And date Range Method");
         List<AFormat> formats = objManageAFormatUCIntPort.getAllByProffesorBetween(professorId, startDate, endDate);
         List<AFormatDTOResponse> response = formats.stream()
                 .map(aFormatMapper::toResponse)

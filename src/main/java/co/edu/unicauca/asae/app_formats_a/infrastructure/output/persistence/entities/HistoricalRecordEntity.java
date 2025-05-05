@@ -34,7 +34,7 @@ public class HistoricalRecordEntity {
     @JoinColumn(name = "professorid", nullable = false)
     private ProfessorEntity professor;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rolId", nullable = false)
     private RoleEntity objRole;
 }

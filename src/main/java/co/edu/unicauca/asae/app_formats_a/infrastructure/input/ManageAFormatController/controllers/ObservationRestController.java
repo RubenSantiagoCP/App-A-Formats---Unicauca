@@ -27,6 +27,7 @@ public class ObservationRestController {
 
     @PostMapping
     public ResponseEntity<ObservationDTOCreateResponse> save(@Valid  @RequestBody ObservationDTORequest observationDTORequest, @RequestParam("formatId") Long formatId) {
+        PrintUtils.writeHeader("Save Observation Method");
         ObservationDTOCreateResponse observationDTOCreateResponse = observationInputMapper.toResponse(this.manageObservationUCIntPort.save(observationInputMapper.toDomain(observationDTORequest), formatId));
         return new ResponseEntity<>(observationDTOCreateResponse, HttpStatus.CREATED);
     }

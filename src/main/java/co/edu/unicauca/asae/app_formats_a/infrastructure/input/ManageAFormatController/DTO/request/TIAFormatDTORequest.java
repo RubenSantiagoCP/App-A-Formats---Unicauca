@@ -20,6 +20,6 @@ public class TIAFormatDTORequest extends AFormatDTORequest {
 
     private String student2Name;
 
-    @Pattern(regexp = "^1046\\d*$", message = "AFormat.studentCode.mustStartWith1046")
+    @Pattern(regexp = "^1046\\d*$", message = "{AFormat.studentCode.mustStartWith1046}")
     private String student2code;
 }

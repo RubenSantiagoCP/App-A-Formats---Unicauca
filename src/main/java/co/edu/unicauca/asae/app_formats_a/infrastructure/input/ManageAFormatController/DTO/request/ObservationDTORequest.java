@@ -13,11 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 public class ObservationDTORequest {
     
-    @Size(min = 3, max = 100, message = "observation.size")
-    @NotBlank(message = "observation.required")
+    @Size(min = 3, max = 100, message = "{observation.size}")
+    @NotBlank(message = "{observation.required}")
     private String observation;
 
-    @Size(min = 1, max = 3, message = "observation.professors.size")
-    @NotEmpty(message = "observation.professors.required")
+    @Size(min = 1, max = 3, message = "{observation.professors.size}")
+    @NotEmpty(message = "{observation.professors.required}")
     private List<Long> professorsId;
 }

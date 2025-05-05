@@ -43,7 +43,7 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
     public AFormat getById(Long id) {
         boolean existsAFormat = this.manageAFormatGateway.existsById(id);
         if(!existsAFormat){
-            resultsFormatter.returnResponseErrorEntityNotFound("Format with ID "+id+" doesn't exist");
+            resultsFormatter.returnResponseErrorBusinessRuleViolation("Format with ID "+id+" doesn't exist");
         }
         return this.manageAFormatGateway.findById(id);
     }
@@ -67,13 +67,13 @@ public class ManageAFormatUCAdapter implements ManageAFormatUCIntPort{
         boolean emailExists = this.manageProfessorGateway.existsProfessorByEmail(professor.getEmail());
 
         if (professor.getId() == null && emailExists) {
-            resultsFormatter.returnResponseErrorEntityAlreadyExists("Email '" +professor.getEmail()+"' already registered");
+            resultsFormatter.returnResponseErrorBusinessRuleViolation("Email '" +professor.getEmail()+"' already registered");
         }
 
         if (professor.getId() != null) {
             boolean idExists = this.manageProfessorGateway.existsById(professor.getId());
             if (!idExists) {
-                resultsFormatter.returnResponseErrorEntityNotFound("Professor with ID "+professor.getId()+" doesn't exist");
+                resultsFormatter.returnResponseErrorBusinessRuleViolation("Professor with ID "+professor.getId()+" doesn't exist");
             }
         }
     }

@@ -37,8 +37,9 @@ public class ProfessorRestController {
     private final AFormatInputMapper aFormatInputMapper;
 
 
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<List<ProfessorDTOResponse>> getByGroupAndStartWithPattern(@RequestParam("groupName") String groupName, @RequestParam("pattern") String pattern) {
+        PrintUtils.writeHeader("Get Professor by Group And Start With Pattern Method");
         List<Professor> professors = this.manageProfessorUCAdapter.getByGroupAndStartWithPattern(groupName, pattern);
         return ResponseEntity.ok(professorInputMapper.toResponseList(professors));
     }
@@ -46,12 +47,14 @@ public class ProfessorRestController {
 
     @GetMapping("/committee-members")
     public ResponseEntity<List<ProfessorDTOResponse>> getComiteeMembers(){
+        PrintUtils.writeHeader("Get Committee Members Method");
         List<Professor> professors = this.manageProfessorUCAdapter.getCommitteeMembers();
         return ResponseEntity.ok(professorInputMapper.toResponseListWithHistoricalRecords(professors, new CycleAvoidingMappingContext()));
     }
 
     @GetMapping("/aformats/{id}")
     public ResponseEntity<List<AFormatDTOResponse>> getAFormatsByIdProfessor(@PathVariable @Min(value= 1, message = "{professor.getAFormats.IdValidation}") Long id){
+        PrintUtils.writeHeader("get Formats By Professor Id Method");
         List<AFormat> aFormats = this.manageProfessorUCAdapter.getAllAFormatsByProfessor(id);
         return  ResponseEntity.ok(this.aFormatInputMapper.lstAFormatsToResponse(aFormats));
     }

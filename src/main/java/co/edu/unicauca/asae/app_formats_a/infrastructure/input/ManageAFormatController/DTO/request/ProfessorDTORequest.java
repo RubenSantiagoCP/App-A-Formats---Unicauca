@@ -20,11 +20,15 @@ public class ProfessorDTORequest {
 
     private Long id;
 
+    @Size(min = 3, max = 100, message = "{professor.name.size}")
     private String name;
 
+    @Size(min = 3, max = 100, message = "{professor.lastName.size}")
     private String lastName;
 
+    @Size(min = 3, max = 100, message = "{professor.groupName.size}")
     private String groupName;
 
+    @Email(message = "{professor.email.invalid}")
     private String email;
 }

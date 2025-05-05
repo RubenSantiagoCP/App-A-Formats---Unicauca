@@ -29,14 +29,14 @@ public class AFormatEntity {
     @Column(name = "specific_objective", nullable = false)
     private List<String> specificObjective;
 
-    @ManyToOne(cascade = { CascadeType.ALL })
+    @ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinColumn(name = "professorId", nullable = false)
     private ProfessorEntity objProfessor;
 
     @OneToOne(mappedBy = "objAformat", cascade = { CascadeType.ALL})
     private StateEntity state;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "objAFormat", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objAFormat", cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
     private List<EvaluationEntity> evaluations;
 
     @Column(name = "student1_name", nullable = false)

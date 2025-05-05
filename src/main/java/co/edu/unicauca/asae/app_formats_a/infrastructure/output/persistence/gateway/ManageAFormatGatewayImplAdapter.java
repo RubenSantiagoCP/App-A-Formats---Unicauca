@@ -59,8 +59,11 @@ public class ManageAFormatGatewayImplAdapter implements ManageAFormatGatewayIntP
     @Override
     @Transactional(readOnly = true)
     public AFormat findById(Long id) {
+        System.err.println("Before Fetching AFormat by ID from the database...");
         AFormatEntity aFormat = aFormatRepository.findById(id).orElse(null);
-        return aFormatMapper.toDomainCreate(aFormat);
+        System.err.println("After Fetching AFormat by ID from the database...");
+        AFormat aFormatResult = aFormatMapper.toDomainCreate(aFormat);
+        return aFormatResult;
     }
 
     @Override

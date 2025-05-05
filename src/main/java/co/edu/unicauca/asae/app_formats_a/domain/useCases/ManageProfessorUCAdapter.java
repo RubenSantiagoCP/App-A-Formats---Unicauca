@@ -32,7 +32,7 @@ public class ManageProfessorUCAdapter implements ManageProfessorUCIntPort {
 
         boolean professorExists = this.manageProfessorGateway.existsById(id);
         if(!professorExists){
-            resultsFormatterIntPort.returnResponseErrorEntityNotFound("Professor with ID "+id+" doesn't exist");
+            resultsFormatterIntPort.returnResponseErrorBusinessRuleViolation("Professor with ID "+id+" doesn't exist");
         }
 
         return this.manageProfessorGateway.getAllAFormatsById(id);

@@ -27,7 +27,7 @@ public class ObservationEntity {
     @Column(name = "observation_date_register", nullable = false)
     private LocalDate observationDateRegister;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "proffesor_observation",
             joinColumns = @JoinColumn(name = "observation_id"),
             inverseJoinColumns = @JoinColumn(name = "proffesor_id"))

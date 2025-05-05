@@ -15,11 +15,11 @@ import lombok.Setter;
 @JsonTypeName("PPA")
 public class PPAFormatDTORequest extends AFormatDTORequest {
     
-    @Size(min = 3, max = 100, message = "PPAformat.assesorName.size")
-    @NotBlank(message = "PPAformat.assesorName.required")
+    @Size(min = 3, max = 100, message = "{PPAformat.assesorName.size}")
+    @NotBlank(message = "{PPAformat.assesorName.required}")
     private String assesorName;
 
-    @Size(min = 3, max = 100, message = "PPAformat.acceptanceLetterRoute.size")
-    @NotBlank(message = "PPAformat.acceptanceLetterRoute.required")
+    @Size(min = 3, max = 100, message = "{PPAformat.acceptanceLetterRoute.size}")
+    @NotBlank(message = "{PPAformat.acceptanceLetterRoute.required}")
     private String acceptanceLetterRoute;
 }

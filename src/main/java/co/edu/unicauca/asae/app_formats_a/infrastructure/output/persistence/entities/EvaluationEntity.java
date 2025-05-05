@@ -34,7 +34,7 @@ public class EvaluationEntity {
     @JoinColumn(name = "formatAId", nullable = false)
     private AFormatEntity objAFormat;
 
-    @OneToMany(mappedBy = "objEvaluation")
+    @OneToMany(mappedBy = "objEvaluation", fetch = FetchType.EAGER)
     private List<ObservationEntity> observations;
 
 }

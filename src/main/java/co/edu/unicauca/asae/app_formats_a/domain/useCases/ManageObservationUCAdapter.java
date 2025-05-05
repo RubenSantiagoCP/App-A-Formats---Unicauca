@@ -33,12 +33,12 @@ public class ManageObservationUCAdapter implements ManageObservationUCIntPort {
     public Observation save(Observation observation, Long formatId) {
         boolean existsFormat = manageAFormatGateway.existsById(formatId);
         if(!existsFormat){
-            resultsFormatter.returnResponseErrorEntityNotFound("Format with ID "+formatId+" doesn't exist");        }
+            resultsFormatter.returnResponseErrorBusinessRuleViolation("Format with ID "+formatId+" doesn't exist");        }
 
         for (Professor professor : observation.getProfessors()) {
             boolean professorById = manageProfessorGateway.existsById(professor.getId());
             if (!professorById) {
-                resultsFormatter.returnResponseErrorEntityNotFound("Professor with ID "+professor.getId()+" doesn't exist");
+                resultsFormatter.returnResponseErrorBusinessRuleViolation("Professor with ID "+professor.getId()+" doesn't exist");
             }
         }
 

@@ -79,7 +79,9 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     @Override
     @Transactional(readOnly = true)
     public Optional<List<Professor>> getCommiteeMembers() {
+        System.err.println("Before Fetching Committee Members from the database...");
         Optional<List<ProfessorEntity>> dbProffesors = professorRepository.findAllByHistoricalRecord_ObjRole_AssignedRole(RoleEnum.COMMITTEE_MEMBER);
+        System.err.println("After Fetching Committee Members from the database...");
         return dbProffesors.flatMap(entities -> Optional.of(professorOutputMapper.toDomainListWithRecords(entities, new CycleAvoidingMappingContext())));
     }
 
@@ -87,6 +89,7 @@ public class ManageProfessorGatewayImplAdapter implements ManageProfessorGateway
     @Override
     @Transactional(readOnly = true)
     public List<AFormat> getAllAFormatsById(Long id) {
+        System.err.println("Before Fetching AFormats By Professor Id from the database...");
         Optional<ProfessorEntity> professorEntity = this.professorRepository.findProfessorWithFormatsAndEvaluationsById(id);
         if (professorEntity.isPresent()) {
             List<AFormatEntity> aFormatEntities = professorEntity.get().getAFormats();
